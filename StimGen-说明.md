@@ -1,354 +1,353 @@
-# StimGen 说明文档
+# StimGen Documentation
 
-> **当前协议提示（2026-08-30）：** 本项目已从 2-back 改为独立 Pairing：`Reference A -> Comparison B -> Same / Different`。
-> 当前协议、字段和 pilot 边界请以 [`Docs/VR_Pairing_Similarity_Transition_Protocol_20260830.md`](Docs/VR_Pairing_Similarity_Transition_Protocol_20260830.md) 为准。
-> 本文件中仍出现的 2-back、t-2、ChainID、初始化呈现和两条记忆链描述属于历史版本，暂不作为当前运行说明。
+> **Current protocol note (2026-08-30):** This project has changed from 2-back to independent Pairing: `Reference A -> Comparison B -> Same / Different`.
+> For the current protocol, fields, and pilot boundary, refer to [`Docs/VR_Pairing_Similarity_Transition_Protocol_20260830.md`](Docs/VR_Pairing_Similarity_Transition_Protocol_20260830.md).
+> The 2-back, t-2, ChainID, initialization-presentation, and two-memory-chain descriptions that still appear in this file belong to the historical version and are not current runtime instructions for now.
 
-对应方案：**VR 2-back 三维结构相似度与状态转移实验计划（四零件修订版）**
+Corresponding plan: **VR 2-back 3D Structural Similarity and State-Transition Experiment Plan (Four-Part Revision)**
 
-这份文档解释这个程序在做什么、为什么这么做、每个设置是干嘛的、你该怎么操作。
-只想赶紧跑起来，跳到第 8 节。
-
----
-
-## 1. 一句话概括
-
-> 生成 4 零件三维物体的刺激库，算出全部物体两两之间的结构关系，
-> 据此为每个参与者排出 6 个 block 的 2-back 序列，播放并记录行为与事件标记。
-
-三个阶段，必须按顺序：
-
-```
-【建库】Unity 编辑器里跑一次
-   生成家族 → 逐层检查 → 算全物体配对矩阵 → 冻结成 bank.json
-
-【排程】每个参与者一次
-   用配对矩阵排出 6 blocks × 32 呈现 → 运行前检查 → session_Pxxx.json
-
-【运行】被试面前跑
-   读 session JSON → 注视点/刺激/空白 → 收按键 → 写 CSV + 事件标记
-```
-
-**运行期不做任何随机，也不根据被试表现改变刺激。** 所有序列在被试戴上设备之前
-就已经生成并通过检查。
+This document explains what this program does, why it does it, what each setting is for, and how you should operate it.
+If you just want to get it running quickly, jump to Section 8.
 
 ---
 
-## 2. 实验结构：三级
+## 1. One-sentence overview
+
+> Generate a stimulus bank of 4-part 3D objects, calculate the structural relationships between every pair of objects,
+> and use this to schedule a 6-block 2-back sequence for each participant, then play it back and record behavior and event markers.
+
+Three stages, which must be performed in order:
+
+```
+[Build the bank] Run once in the Unity Editor
+   Generate families → inspect layer by layer → calculate the full object-pair matrix → freeze it as bank.json
+
+[Schedule] Once per participant
+   Use the pair matrix to schedule 6 blocks × 32 presentations → run preflight checks → session_Pxxx.json
+
+[Run] Run in front of the participant
+   Read the session JSON → fixation/stimulus/blank interval → collect key presses → write CSV + event markers
+```
+
+**The runtime performs no randomization and does not change stimuli based on participant performance.** All sequences are generated and checked
+before the participant puts on the device.
+
+---
+
+## 2. Experimental structure: three levels
 
 ```
 Experiment
-  └── Block（6 个，每个结束后休息 + 心理努力评分）
-        └── Segment（4 个，结构相似度在这一层固定）
-              └── Trial（旋转幅度在这一层变化）
+  └── Block (6 per participant; rest + mental-effort rating after each)
+        └── Segment (4; structural similarity is fixed at this level)
+              └── Trial (rotation magnitude varies at this level)
 ```
 
-| 层级 | 数量 | 说明 |
+| Level | Count | Description |
 |---|---|---|
-| Block | 6 / 人 | 30 scored trials + 2 个不计分的初始化呈现 = 32 次呈现 |
-| Segment | 4 / block | 长度 **8、7、8、7**，合计 30 |
-| Boundary | 3 / block | 共 18 个 / 人：**12 个真改变 + 6 个 No-op** |
-| Trial | 180 / 人 | 每 block 约 10 Target + 20 Non-target |
+| Block | 6 / participant | 30 scored trials + 2 unscored initialization presentations = 32 presentations |
+| Segment | 4 / block | Length **8, 7, 8, 7**, total 30 |
+| Boundary | 3 / block | 18 per participant: **12 real changes + 6 No-op** |
+| Trial | 180 / participant | Approximately 10 Target + 20 Non-target per block |
 
-**segment 边界不暂停、不提示音、不显示文字**，被试不知道边界在哪。
+**Segment boundaries do not pause, play a tone, or display text**, and the participant does not know where the boundaries are.
 
-### 为什么是 4 个长 segment 而不是 6 个短的
+### Why 4 long segments instead of 6 short ones
 
-5 个 trial 只有约 16 秒，其中约 1/3 是 Target，真正体现相似度的 Non-target 只有
-3–4 个，谈不上形成了一个稳定状态。而且每个 segment 开头要占用 2 个位置强制设为
-Non-target，6 个 segment 就要占 12 个，而整个 block 才 20 个 Non-target——
-剩余位置的 Target 概率会异常升高，被试可能学会预测。
+Five trials last only about 16 seconds; approximately one third of that is Target, leaving only
+3–4 Non-targets that genuinely reflect similarity, which is not enough to form a stable state. In addition, the first 2 positions of each segment must be forced to
+Non-target, so 6 segments would require 12 of them, while the whole block has only 20 Non-targets—
+the Target probability in the remaining positions would become abnormally high, and the participant might learn to predict it.
 
 ---
 
-## 3. 六种 block sequence
+## 3. Six block sequences
 
-L / M / H = Low / Medium / High structural similarity。
+L / M / H = Low / Medium / High structural similarity.
 
-| Sequence | Seg1 | Seg2 | Seg3 | Seg4 | 三个边界 |
+| Sequence | Seg1 | Seg2 | Seg3 | Seg4 | Three boundaries |
 |---|---|---|---|---|---|
-| A | L | L | M | H | **L→L**、L→M、M→H |
-| B | L | H | H | M | L→H、**H→H**、H→M |
-| C | M | M | L | H | **M→M**、M→L、L→H |
-| D | M | H | H | L | M→H、**H→H**、H→L |
-| E | H | L | M | M | H→L、L→M、**M→M** |
-| F | H | M | L | L | H→M、M→L、**L→L** |
+| A | L | L | M | H | **L→L**, L→M, M→H |
+| B | L | H | H | M | L→H, **H→H**, H→M |
+| C | M | M | L | H | **M→M**, M→L, L→H |
+| D | M | H | H | L | M→H, **H→H**, H→L |
+| E | H | L | M | M | H→L, L→M, **M→M** |
+| F | H | M | L | L | H→M, M→L, **L→L** |
 
-粗体是 No-op（相似度不变，但同样走完边界规则）。**已用程序验证过的平衡性质**：
+Bold is No-op (similarity does not change, but the boundary rules are still completed). **The verified balancing properties are**:
 
-- L / M / H 各占 **60 个 scored trials**（8+7+8+8+7+7+8+7 = 60，三个等级都精确对上）
-- 六种有方向的改变各 2 次，三种 No-op 各 2 次
-- 每个 block 都包含 L、M、H
-- 每个 condition 在四个 segment 位置出现次数相同（各 2 次）
+- L / M / H each account for **60 scored trials** (8+7+8+8+7+7+8+7 = 60; all three levels match exactly)
+- Each of the six directional changes occurs twice, and each of the three No-ops occurs twice
+- Every block contains L, M, and H
+- Each condition appears equally often in each of the four segment positions (2 times each)
 
-参与者之间用**循环拉丁方**轮换 block 顺序（`ExperimentDesign.BlockOrderFor`），
-编号偶数正序、奇数逆序。Same/Different 的左右手映射也按编号奇偶平衡。
+Across participants, the block order is rotated using a **cyclic Latin square** (`ExperimentDesign.BlockOrderFor`);
+even-numbered IDs use forward order and odd-numbered IDs use reverse order. The left/right hand mapping for Same/Different is also balanced by ID parity.
 
-> ⚠️ **一个已知的设计缺口**：H→H 这个 No-op 在六种 sequence 里**只出现在第二个边界**
-> （B 和 D），而 L→L 和 M→M 出现在第一和第三个边界。三种 No-op × 三个边界位置需要
-> 9 种组合，6 种 sequence 装不下。所以 "H→H 的效应" 和 "第二个边界位置的效应"
-> 在这套设计里是混淆的。分析时不要单独解释 H→H，或者把边界位置作为协变量。
+> ⚠️ **A known design gap**: The H→H No-op appears **only at the second boundary** in the six sequences
+> (B and D), while L→L and M→M appear at the first and third boundaries. The 3 No-op types × 3 boundary positions require
+> 9 combinations, which cannot fit into 6 sequences. Therefore, the “effect of H→H” and the “effect of the second-boundary position”
+> are confounded in this design. Do not interpret H→H separately in analysis, or include boundary position as a covariate.
 
 ---
 
-## 4. 物体与相似度
+## 4. Objects and similarity
 
-### 4.1 每个物体
+### 4.1 Each object
 
-固定 4 个同色零件，各一个：**方块 + 圆柱 + 胶囊 + 椭球**。
+Four fixed same-color parts, one of each: **cube + cylinder + capsule + ellipsoid**.
 
-所有物体满足：零件种类数量相同、体积严格相等（都是 0.30）、同一种无纹理低反光材质、
-全部连接、无悬空/严重重叠/完全遮挡、整体尺寸与中心点统一、排除高度对称与共面。
+All objects satisfy: the number of part types is the same, volumes are exactly equal (all 0.30), the same textureless low-reflectance material is used,
+all parts are connected, with no floating parts/severe overlap/complete occlusion, unified overall size and center point, and exclusion of high symmetry and coplanarity.
 
-因为所有物体都用完全相同的四个零件，被试**不能靠"有没有圆柱"判断**，
-必须判断圆柱连在哪里、胶囊在哪个方向、四个零件的整体关系。
+Because all objects use exactly the same four parts, the participant **cannot decide based on “whether there is a cylinder”**;
+they must judge what the cylinder is connected to, the direction of the capsule, and the overall relationship among the four parts.
 
-### 4.2 空间关系 = 相似度的基础
+### 4.2 Spatial relations = the basis of similarity
 
-4 个零件树状连接 → **3 条空间关系**。一条关系包含两件事：
+Four parts connected as a tree → **3 spatial relations**. A relation contains two things:
 
 ```
-哪两个零件相连  +  子零件位于父零件的哪个方向
+Which two parts are connected  +  the direction in which the child part lies relative to the parent part
 ```
 
-例如 `Cube>Cylinder@YPlus`（圆柱在方块上方）。如果"方块仍然连着圆柱，
-但圆柱从上方移到后方"，这条关系**算作改变了**。
+For example, `Cube>Cylinder@YPlus` (the cylinder is above the cube). If “the cube is still connected to the cylinder,
+but the cylinder moves from above to behind,” this relation **counts as changed**.
 
-> **关键实现细节**：关系是**与树根无关**的。同一个空间摆法，用方块当根搭
-> （"圆柱在方块上方"）和用圆柱当根搭（"方块在圆柱下方"）必须算同一条关系，
-> 否则跨物体比较会得出荒唐结果。程序把形状对按枚举序排好，交换顺序时同时把
-> 方向取反。**已用程序验证**：把 20 个物体分别以每个零件为根重新表达共 80 次，
-> 关系集合始终一致。
+> **Key implementation detail**: Relations are **independent of the tree root**. The same spatial arrangement, constructed with the cube as the root
+> (“the cylinder is above the cube”) and with the cylinder as the root (“the cube is below the cylinder”), must count as the same relation;
+> otherwise cross-object comparisons would produce absurd results. The program sorts the shape pair by enumeration order, and simultaneously reverses the direction when swapping the order. **Verified by the program**:
+> The 20 objects were each re-expressed with every part as the root, for a total of 80 times,
+> and the relation set was always identical.
 
-| Pair 类型 | 生成规则 | 保留的空间关系 |
+| Pair type | Generation rule | Retained spatial relations |
 |---|---|---|
-| Target | 完全相同的 Object ID，只改呈现角度 | 3/3 |
-| High Non-target | 改 1 条 | 2/3 |
-| Medium Non-target | 改 2 条 | 1/3 |
-| Low Non-target | 3 条全改或重建主连接顺序 | 0/3 |
+| Target | Exactly the same Object ID; only change the presentation angle | 3/3 |
+| High Non-target | Change 1 relation | 2/3 |
+| Medium Non-target | Change 2 relations | 1/3 |
+| Low Non-target | Change all 3 relations or rebuild the main connection order | 0/3 |
 
-一次"改变"可以是：把一个零件（连同它的分支）取下接到别处，或者保持连接对象不变
-但换一个合法方向。**程序绝不增加、删除或替换零件。**
+One “change” may be: remove a part (together with its branch) and attach it elsewhere, or keep the connected objects unchanged
+but switch to another legal direction. **The program never adds, removes, or replaces parts.**
 
-### 4.3 为什么必须算"全物体两两配对矩阵"
+### 4.3 Why the full pairwise matrix for all objects is required
 
-这是这一版和之前最大的架构差别。
+This is the biggest architectural difference between this version and the previous one.
 
-Base / High / Medium / Low 只是**生成一个家族时的起始结构**。但 2-back 里
-**任何当前物体在两个 trial 之后都会成为新的参照**：
-
-```
-Trial 2: 物体 B（相对 A 是 High）
-Trial 4: 物体 C（相对 B 是 High）  ← 这里参照是 B，不是 A
-```
-
-所以只有"基准→变体"这一层关系是不够的。物体库冻结前必须计算**所有正式物体
-两两之间**的关系，建成矩阵，Trial Generator 只能从矩阵里挑候选。
-
-矩阵每一格是 `Target / High / Medium / Low / Invalid`，判定要过两道关：
-
-1. **程序关卡**：保留关系数必须正好是 2 / 1 / 0
-2. **视觉关卡**：0°/45°/90° 三个角度的轮廓重合度都落在该等级区间，且三个角度一致
-
-还有一类特殊的 Invalid：**关系完全相同（3/3）但不是同一个 Object ID**——
-结构上是同一个东西，零件朝向不同所以看起来不一样。它既不能当 Target
-（ID 不同）也不该当 Non-target，直接排除。
-
-### 4.4 覆盖度：每个物体每级至少 2 个候选
-
-如果某个物体在 High 下没有候选，它一旦出现在会继续成为参照的位置就会卡死。
-所以建库最后有一个**自动补充**环节：对候选不足的 (物体, 等级) 组合直接派生新变体
-加入库中，新物体同时也会成为别人的候选。
-
-**实测（24 家族 × 4 = 96 个初始物体）**：
+Base / High / Medium / Low are only **starting structures when generating a family**. But in 2-back,
+**any current object becomes the new reference after two trials**:
 
 ```
-配对矩阵：合法配对 4551 对
-覆盖度补充：新增 35 个物体 → 正式物体 131 个（另有练习物体 20 个）
-
-High  ：平均 3.6 个候选，最少 2，最多 9
-Medium：平均 26.0，最少 13，最多 40
-Low   ：平均 100.2，最少 85，最多 113
+Trial 2: Object B (High relative to A)
+Trial 4: Object C (High relative to B)  ← the reference here is B, not A
 ```
 
-> ⚠️ **High 是唯一紧张的等级**。两个随机 4 零件物体恰好共享 2 条关系的概率很低，
-> 所以 High 候选几乎全靠家族内部派生和自动补充撑起来。如果你提高 `formalFamilies`
-> 或 `variantsPerLevel`，最该关注的就是 High 那一行。
+Therefore, the “baseline → variant” level of relationships alone is not enough. Before freezing the object bank, the relationships between **every pair of formal objects**
+must be calculated into a matrix, and the Trial Generator can only select candidates from that matrix.
+
+Each matrix cell is `Target / High / Medium / Low / Invalid`; classification must pass two gates:
+
+1. **Program gate**: the number of retained relations must be exactly 2 / 1 / 0
+2. **Visual gate**: the silhouette overlap at 0°/45°/90° must fall within the level’s interval at all three angles, and the three angles must be consistent
+
+There is also a special type of Invalid: **the relations are exactly the same (3/3), but the Object IDs are different**—
+structurally it is the same thing, but it looks different because the part orientations differ. It can be neither a Target
+(ID is different) nor a Non-target, so it is excluded directly.
+
+### 4.4 Coverage: at least 2 candidates for each object at each level
+
+If an object has no High candidates, it will get stuck as soon as it appears in a position where it continues to serve as the reference.
+Therefore, the final bank-building stage has an **automatic supplementation** step: for any (object, level) combination with too few candidates, directly derive new variants
+and add them to the bank; each new object also becomes a candidate for others.
+
+**Measured (24 families × 4 = 96 initial objects)**:
+
+```
+Pair matrix: 4551 valid pairs
+Coverage supplementation: +35 new objects → 131 formal objects (plus 20 practice objects)
+
+High  : 3.6 candidates on average, minimum 2, maximum 9
+Medium: 26.0 on average, minimum 13, maximum 40
+Low   : 100.2 on average, minimum 85, maximum 113
+```
+
+> ⚠️ **High is the only tight level**. The probability that two random 4-part objects happen to share 2 relations is low,
+> so High candidates rely almost entirely on within-family derivation and automatic supplementation. If you increase `formalFamilies`
+> or `variantsPerLevel`, the High row is the one that deserves the closest attention.
 
 ---
 
 ## 5. Rotation
 
-RotationDelta 是**当前物体与 t−2 物体的方向差**，不是相对世界坐标的绝对角度：
-0° 相同、45°、90°。只旋转整个 Root，第一版只绕统一的垂直轴。
+RotationDelta is the **directional difference between the current object and the t−2 object**, not the absolute angle relative to world coordinates:
+0° means identical, then 45° and 90°. Only the entire Root is rotated; the first version rotates around a unified vertical axis.
 
-**已验证**：每人 0°/45°/90° 各恰好 60 个 scored trial。
-角度在 Target 组和 Non-target 组内部分别均衡；三个边界后的第一个 trial 按 block
-轮换角度，让六种 transition 都能覆盖到不同角度。
+**Verified**: Each participant has exactly 60 scored trials at each of 0°/45°/90°.
+Angles are balanced separately within Target and Non-target groups; the angle of the first trial after each of the three boundaries is rotated across blocks,
+so that all six transition types can be covered at different angles.
 
-> ⚠️ 每种有方向的 transition 每人只出现 2 次，所以**单个参与者层面**不可能覆盖全
-> 3 种角度。这个平衡只在群体层面成立。
-
----
-
-## 6. 一个 trial 的时序
-
-```
-注视点 0.5s
-  ↓  StimulusOnset 事件标记
-物体 2.5s ── 被试按 Same / Different
-  ↓  即使提前作答也显示满 2.5s，保证每个人观察时间相同
-  ↓  超时记为 Timeout，不当作错误按键，序列照常推进
-物体消失 → 空白 0.3–0.5s
-  ↓  写日志，进入下一个 trial
-```
-
-一个 trial 约 3.3–3.5 秒，一个 segment（7–8 trials）约 23–28 秒。
-**正式实验不给对错反馈**，只有练习阶段提供。
-
-注视点出现、物体出现、按键、物体消失分别发送事件标记（`IMarkerSink` 接口），
-以便与 EEG / ECG 对齐。
+> ⚠️ Each directional transition appears only twice per participant, so it is **impossible to cover all
+> 3 angles at the individual-participant level**. This balance holds only at the group level.
 
 ---
 
-## 7. 代码结构
+## 6. Timing of one trial
 
-| 模块 | 文件 | 职责 |
+```
+Fixation point 0.5s
+  ↓  StimulusOnset event marker
+Object 2.5s ── participant presses Same / Different
+  ↓  Even if the participant responds early, the full 2.5s is still displayed, ensuring the same observation time for everyone
+  ↓  Timeout is recorded as Timeout and is not treated as an incorrect key press; the sequence proceeds normally
+Object disappears → blank 0.3–0.5s
+  ↓  Write the log and proceed to the next trial
+```
+
+One trial lasts approximately 3.3–3.5 seconds, and one segment (7–8 trials) lasts approximately 23–28 seconds.
+**The formal experiment provides no correctness feedback**; feedback is provided only during practice.
+
+The appearance of the fixation point, object appearance, key press, and object disappearance each send an event marker (`IMarkerSink`)
+so that they can be aligned with EEG / ECG.
+
+---
+
+## 7. Code structure
+
+| Module | File | Responsibility |
 |---|---|---|
-| Part Library | `PartLibrary.cs` | 4 种零件的 mesh、6 个 socket 方向、统一材质。胶囊是程序化生成的（内置胶囊非均匀缩放会把两头压扁） |
-| Object Generator | `ObjectGenerator.cs` + `ObjectLayout.cs` + `ShapeMetrics.cs` + `ShapeSdf.cs` | 按 seed 拼装 4 零件组合；关系→坐标；等体积尺寸；SDF 重叠判定 |
-| Variant Generator | `VariantGenerator.cs` | 按 2/3、1/3、0/3 生成版本 |
-| Object Validator | `ObjectValidator.cs`（几何）+ `SilhouetteAnalyzer.cs`（轮廓/遮挡） | 连接、重叠、遮挡、对称、共面、尺寸、多视角轮廓 |
-| Stimulus Bank | `StimulusBank.cs` + `StimulusBankBuilder.cs` | 家族、模型、Seed、**配对矩阵**、覆盖度补充与报告 |
-| Block/Segment Scheduler | `ExperimentDesign.cs` | 六种 sequence、segment 长度、参与者间轮换 |
-| 2-back Trial Generator | `TrialGenerator.cs` | 两条链、Target 比例、边界 Non-target、重复限制、曝光均衡 |
-| Rotation Controller | `RotationController.cs` | 只旋转 Root |
-| Experiment Logger | `ExperimentLogger.cs` | CSV + block 汇总 + session 副本 |
-| Preflight Validator | `PreflightValidator.cs` | 运行前拦下任何不平衡或不合法的序列 |
-| 运行 | `ExperimentRunner.cs` | 注视点/刺激/空白时序、按键、事件标记 |
-| 工具窗口 | `Editor/StimulusSetBuilder.cs` | `Tools ▸ StimGen ▸ Builder` |
+| Part Library | `PartLibrary.cs` | Meshes for 4 part types, 6 socket directions, and a unified material. The capsule is generated procedurally (the built-in capsule’s two ends are flattened by non-uniform scaling) |
+| Object Generator | `ObjectGenerator.cs` + `ObjectLayout.cs` + `ShapeMetrics.cs` + `ShapeSdf.cs` | Assemble 4-part combinations from a seed; relations → coordinates; equal-volume dimensions; SDF overlap check |
+| Variant Generator | `VariantGenerator.cs` | Generate variants with 2/3, 1/3, and 0/3 relations |
+| Object Validator | `ObjectValidator.cs` (geometry) + `SilhouetteAnalyzer.cs` (silhouette/occlusion) | Connectivity, overlap, occlusion, symmetry, coplanarity, dimensions, and multi-view silhouette |
+| Stimulus Bank | `StimulusBank.cs` + `StimulusBankBuilder.cs` | Families, models, seeds, **pair matrix**, coverage supplementation and report |
+| Block/Segment Scheduler | `ExperimentDesign.cs` | Six sequences, segment lengths, rotation across participants |
+| 2-back Trial Generator | `TrialGenerator.cs` | Two chains, Target ratio, boundary Non-targets, repetition limits, exposure balancing |
+| Rotation Controller | `RotationController.cs` | Rotate only the Root |
+| Experiment Logger | `ExperimentLogger.cs` | CSV + block summary + session copy |
+| Preflight Validator | `PreflightValidator.cs` | Stop any unbalanced or invalid sequence before running |
+| Runtime | `ExperimentRunner.cs` | Fixation/stimulus/blank timing, key presses, event markers |
+| Tool window | `Editor/StimulusSetBuilder.cs` | `Tools ▸ StimGen ▸ Builder` |
 
-数据结构在 `StimTypes.cs`（物体、关系、配对类型）和 `TrialTypes.cs`
-（呈现记录、block、session）。
+Data structures are in `StimTypes.cs` (objects, relations, pair types) and `TrialTypes.cs`
+(presentation records, blocks, sessions).
 
 ---
 
-## 8. 操作流程
+## 8. Operation flow
 
-### 第 1 步：打开项目
-打开 Unity，等编译完，Console 无红色报错。
-菜单 `Tools ▸ StimGen ▸ Builder`。窗口顶部会显示实验设计常量和当前物体构成。
+### Step 1: Open the project
+Open Unity, wait for compilation to finish, and make sure there are no red errors in the Console.
+Menu: `Tools ▸ StimGen ▸ Builder`. The top of the window displays the experimental design constants and the current object composition.
 
-### 第 2 步：材质
-确认「零件颜色」为白色，点「创建 / 刷新零件材质」→ `Assets/Materials/StimulusPart.mat`。
-把场景里手搭的 `similar-levelN` 物体禁用或删掉。
+### Step 2: Materials
+Confirm that “Part Color” is white, then click “Create / Refresh Part Material” → `Assets/Materials/StimulusPart.mat`.
+Disable or delete the hand-built `similar-levelN` objects in the scene.
 
-### 第 3 步：肉眼验收拼装 ★
-点「在场景中预览 12 个样例」，Scene 视图里转着看。核对：4 个零件、四种形状各一个、
-全部连接、不穿模、不共面。觉得发白糊成一片就降 Directional Light 强度；
-觉得接缝太松/太紧改 `ShapeMetrics.ContactOverlap`。
+### Step 3: Visually inspect the assemblies ★
+Click “Preview 12 samples in the scene” and rotate them in the Scene view to inspect them. Check: 4 parts, one of each of the four shapes,
+all connected, no interpenetration, no coplanarity. If everything looks washed out and blurred together, lower the Directional Light intensity;
+if the seams look too loose/tight, adjust `ShapeMetrics.ContactOverlap`.
 
-### 第 4 步：先跑纯几何建库
-关掉「执行轮廓/遮挡检查」，点 **① 建刺激库**。不到 1 秒跑完。
-看状态栏的**配对覆盖度**报告，确认三个等级都没有"不足 2 个候选的物体"。
-这一步只确认管线通，别看结论。
+### Step 4: First run the pure-geometry bank build
+Turn off “Perform silhouette/occlusion checks” and click **① Build Stimulus Bank**. It should finish in under 1 second.
+Check the **pairing coverage** report in the status bar and confirm that no object has “fewer than 2 candidates at any level”.
+This step only confirms that the pipeline works; do not interpret the result.
 
-### 第 5 步：打开视觉检查，校准 IoU 阈值 ★ 唯一需要判断的一步
-勾上「执行轮廓/遮挡检查」，再点 **① 建刺激库**。这次慢很多。
-重点看**配对覆盖度**和"轮廓不符"的淘汰数：
+### Step 5: Enable visual checks and calibrate the IoU thresholds ★ The only step requiring judgment
+Check “Perform silhouette/occlusion checks” and click **① Build Stimulus Bank** again. This run is much slower.
+Focus on **pairing coverage** and the number discarded for “silhouette mismatch”:
 
-| 情况 | 怎么办 |
+| Situation | What to do |
 |---|---|
-| 三个等级覆盖度都够 | ✅ 进第 6 步 |
-| High 覆盖度掉到 0–1 | 把「High IoU ≥」往下调（0.80 → 0.75） |
-| Low 覆盖度掉很多 | 把「Low IoU ≤」往上调（0.50 → 0.60） |
-| 各等级都掉，提示三角度不一致 | 把「三角度最大跨度」往上调 |
+| Coverage is sufficient at all three levels | ✅ Go to Step 6 |
+| High coverage falls to 0–1 | Lower “High IoU ≥” (0.80 → 0.75) |
+| Low coverage drops substantially | Raise “Low IoU ≤” (0.50 → 0.60) |
+| All levels drop, with a message that the three angles are inconsistent | Raise “Maximum spread across three angles” |
 
-### 第 6 步：排会话
-设好「起始参与者编号」和「生成几个参与者」，点 **② 排会话 + 运行前检查**。
-每人一个 `session_Pxxx.json`。状态栏会逐人报告是否通过运行前检查——
-**任何一个没通过都不能拿去跑实验**。
+### Step 6: Schedule sessions
+Set “starting participant ID” and “how many participants to generate”, then click **② Schedule Sessions + Preflight Check**.
+One `session_Pxxx.json` is generated per person. The status bar reports whether each person passed the preflight check—
+**if any one fails, it cannot be used to run the experiment**.
 
-### 第 7 步：跑一个 block 验收数据
-场景里新建空 GameObject，挂 `ExperimentRunner`，把 `session_P001.json` 拖进
-`Session Json`，指定 `Fixation Visual`（一个十字或小球），
-**把 Main Camera 从 z = −10 移到 z ≈ −4**。
-进 Play，右键组件标题 → `Run First Block Only`。**F = Different，J = Same**。
+### Step 7: Run one block to validate the data
+Create a new empty GameObject in the scene, attach `ExperimentRunner`, drag `session_P001.json` into
+`Session Json`, and assign `Fixation Visual` (a cross or small sphere).
+**Move the Main Camera from z = −10 to approximately z ≈ −4**.
+Enter Play mode, right-click the component header → `Run First Block Only`. **F = Different, J = Same**.
 
-打开 CSV 验收：
+Open the CSV to validate:
 
-- [ ] 32 行（一个 block）
-- [ ] 前 2 行 `Scored = 0`
-- [ ] `TrialPairType = Target` 的有 10 行
-- [ ] 每个 segment 的前两个 trial 都是 Non-target
-- [ ] `RetainedRelations`：Target = 3，HighNT = 2，MediumNT = 1，LowNT = 0
-- [ ] `RotationDelta` 三种各约 10 个
-- [ ] `IsFirstTrialAfterBoundary = 1` 的有 3 行
-- [ ] `ReactionTimeMs` 有数字，超时行 `Timeout = 1` 且 `Correct` 不为 1
+- [ ] 32 rows (one block)
+- [ ] The first 2 rows have `Scored = 0`
+- [ ] There are 10 rows where `TrialPairType = Target`
+- [ ] The first two trials of every segment are Non-target
+- [ ] `RetainedRelations`: Target = 3, HighNT = 2, MediumNT = 1, LowNT = 0
+- [ ] Approximately 10 of each of the three `RotationDelta` values
+- [ ] There are 3 rows with `IsFirstTrialAfterBoundary = 1`
+- [ ] `ReactionTimeMs` contains numbers; timeout rows have `Timeout = 1` and `Correct` is not 1
 
 ---
 
-## 9. 产出文件
+## 9. Output files
 
-| 文件 | 位置 | 内容 |
+| File | Location | Contents |
 |---|---|---|
-| `StimulusPart.mat` | `Assets/Materials/` | 共用材质 |
-| `stimulus_bank.json` | `Assets/StimulusSets/` | 冻结的刺激库：全部物体 + 家族 + 配对矩阵 |
-| `session_Pxxx.json` | `Assets/StimulusSets/` | 一个参与者的完整序列，自包含（含用到的物体定义） |
-| `Pxxx_<时间>.csv` | `%USERPROFILE%\AppData\LocalLow\<公司>\<项目>\StimGenLogs\` | 一行一次呈现 |
-| `Pxxx_<时间>_blocks.csv` | 同上 | 每 block 的心理努力评分、休息时长、备注 |
-| `Pxxx_<时间>_session.json` | 同上 | 本次实际使用的序列副本 |
+| `StimulusPart.mat` | `Assets/Materials/` | Shared material |
+| `stimulus_bank.json` | `Assets/StimulusSets/` | Frozen stimulus bank: all objects + families + pair matrix |
+| `session_Pxxx.json` | `Assets/StimulusSets/` | Complete sequence for one participant, self-contained (including the definitions of the objects used) |
+| `Pxxx_<time>.csv` | `%USERPROFILE%\AppData\LocalLow\<company>\<project>\StimGenLogs\` | One row per presentation |
+| `Pxxx_<time>_blocks.csv` | Same location | Mental-effort rating, rest duration, and notes for each block |
+| `Pxxx_<time>_session.json` | Same location | Copy of the sequence actually used for this run |
 
-CSV 的列直接对应方案第 11 节的数据结构：位置（Block/Segment/Trial 索引、ChainID）、
-similarity 与 transition（前后 similarity、transition 标签、IsNoOpBoundary、
-TrialsSinceTransition）、刺激（Object/Family/PartSet ID、Seed、关系签名、
-TrialPairType、RetainedRelations、StructuralDistance）、朝向、答案与四分类结果
-（Hit/Miss/FalseAlarm/CorrectRejection/NoResponse）、以及全部时间戳。
+The CSV columns directly correspond to the data structure in Section 11: position (Block/Segment/Trial indices, ChainID),
+similarity and transition (previous/current similarity, transition label, IsNoOpBoundary,
+TrialsSinceTransition), stimulus (Object/Family/PartSet ID, Seed, relation signature,
+TrialPairType, RetainedRelations, StructuralDistance), orientation, answer and four-way outcome
+(Hit/Miss/FalseAlarm/CorrectRejection/NoResponse), and all timestamps.
 
 ---
 
-## 10. 想改东西时改哪里
+## 10. Where to make changes
 
-| 想改什么 | 改哪里 |
+| What to change | Where |
 |---|---|
-| segment 长度、block 数、Target 数、六种 sequence | `ExperimentDesign.cs`（**Pilot 后只允许改 segment 长度**） |
-| 家族数、每级变体数、覆盖度要求 | Builder 窗口「① 刺激库」 |
-| 几何与视觉合格标准 | Builder 窗口，每项都有悬停说明 |
-| Target 连续限制、重复窗口、家族冷却 | Builder 窗口「② 会话排程」 |
-| 零件体积、咬合深度、各形状长径比 | `ShapeMetrics.cs` |
-| 用哪几种形状 | `StimTypes.cs` → `StimConfig.ShapesInUse` |
-| 注视点/呈现/空白时长、按键 | `ExperimentRunner` 组件 Inspector |
-| EEG/ECG 事件标记接入 | 实现 `IMarkerSink`，在 `ExperimentRunner.SetMarkerSink` 注入 |
+| Segment length, number of blocks, number of Targets, six sequences | `ExperimentDesign.cs` (**after the pilot, only segment length may be changed**) |
+| Number of families, number of variants per level, coverage requirement | Builder window, “① Stimulus Bank” |
+| Geometry and visual acceptance criteria | Builder window; every item has a hover tooltip |
+| Target consecutive limit, repetition window, family cooldown | Builder window, “② Session Scheduler” |
+| Part volume, interlocking depth, aspect ratios of each shape | `ShapeMetrics.cs` |
+| Which shapes to use | `StimTypes.cs` → `StimConfig.ShapesInUse` |
+| Fixation/stimulus/blank durations, keys | `ExperimentRunner` component Inspector |
+| EEG/ECG event-marker integration | Implement `IMarkerSink`, inject it with `ExperimentRunner.SetMarkerSink` |
 
 ---
 
-## 11. 当前状态与待办
+## 11. Current status and TODO
 
-### 已实测通过
+### Tested and passed
 
 ```
-建库（24 家族，跳过视觉检查）：
-  正式物体 96 → 覆盖度补充 +35 → 131 个；练习物体 20 个
-  配对矩阵 4551 对合法配对
-  三个等级覆盖度全部达标（High 最少 2，Medium 最少 13，Low 最少 85）
-  耗时 0.4 秒
+Bank build (24 families, visual checks skipped):
+  Formal objects 96 → coverage supplementation +35 → 131; 20 practice objects
+  Pair matrix: 4551 valid pairs
+  Coverage at all three levels passed (High minimum 2, Medium minimum 13, Low minimum 85)
+  Runtime: 0.4 seconds
 
-关系定义的树根无关性：80 次重新定根，关系集合始终一致
-家族内部关系：107 对全部落在 2/1/0 上，零件构成不变
+Tree-root independence of relation definitions: 80 re-rootings, relation set always identical
+Within-family relations: all 107 pairs fell into 2/1/0, with unchanged part composition
 
-排会话：30 个参与者全部通过运行前检查
-  每人 180 scored trials，L/M/H 各 60，0°/45°/90° 各 60
-  Target 60，Non-target 120，18 个边界（12 真 + 6 No-op）
+Session scheduling: all 30 participants passed preflight
+  180 scored trials per participant, 60 each for L/M/H, 60 each for 0°/45°/90°
+  Target 60, Non-target 120, 18 boundaries (12 real + 6 No-op)
 ```
 
-### 尚未实跑
+### Not yet run
 
-- **轮廓 / 遮挡检查**（`SilhouetteAnalyzer`）需要 Unity 编辑器渲染，只做过编译验证。
-  第 5 步就是为了校准它，IoU 阈值大概率要按实测分布调整。
-- **VR 呈现**：`ExperimentRunner` 目前是桌面键盘版。VR 手柄按键、头显中的
-  固定视距与视觉大小、注视点在 VR 中的呈现方式都还没做。
-- **EEG / ECG 接入**：`IMarkerSink` 接口和 CSV 列已就位，但只有一个写 Console 的
-  占位实现，没有接真实采集系统。
-- **练习流程**：练习物体已单独生成并与正式库隔离，但"1–2 个短练习 + 对错反馈 +
-  理解确认"的流程还没写。
-- **Block 后评分**：`LogBlockSummary` 已就位，但采集心理努力 1–7 分的 UI 还没做。
+- **Silhouette / occlusion checks** (`SilhouetteAnalyzer`) require Unity Editor rendering; only compilation has been verified.
+  Step 5 exists to calibrate it; the IoU thresholds will probably need to be adjusted according to the measured distribution.
+- **VR presentation**: `ExperimentRunner` is currently a desktop keyboard version. VR controller input, fixed viewing distance and visual size in the headset,
+  and the way the fixation point is presented in VR have not yet been implemented.
+- **EEG / ECG integration**: the `IMarkerSink` interface and CSV columns are in place, but there is only a placeholder implementation that writes to the Console; no real acquisition system is connected.
+- **Practice flow**: practice objects have been generated separately and isolated from the formal bank, but the “1–2 short practices + correctness feedback +
+  comprehension confirmation” flow has not yet been written.
+- **Post-block rating**: `LogBlockSummary` is in place, but there is no UI yet for collecting the mental-effort score from 1–7.
