@@ -4,6 +4,8 @@ A compact XR experiment for collecting **behavioral, physiological, and sensor-q
 
 The SRP task is designed as an **empirical anchoring study** for the LBOC project. Its purpose is not to establish population-level psychophysiological effects from a small sample, but to provide realistic ranges, temporal dynamics, inter-participant variability, and sensor-failure statistics that can constrain a large-scale synthetic human simulator.
 
+![Overview of the 3D Structure–Rotation Pairing task](Docs/srp-overview.png)
+
 ---
 
 ## 1. Why this experiment exists
