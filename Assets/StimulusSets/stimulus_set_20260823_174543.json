@@ -1,0 +1,846 @@
+{
+    "generatedUtc": "2026-08-23T15:45:38.5645228Z",
+    "masterSeed": 20260823,
+    "candidatesTried": 100,
+    "library": {
+        "objects": [
+            {
+                "objectId": "OBJ20260830",
+                "seed": 20260830,
+                "baseObjectId": "",
+                "derivedLevel": 0,
+                "retainedEdges": -1,
+                "parts": [
+                    {
+                        "index": 0,
+                        "shape": 3,
+                        "parentIndex": -1,
+                        "direction": 0,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": -0.2826078236103058,
+                            "y": 0.3124390244483948,
+                            "z": -0.2655203938484192
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 1,
+                        "shape": 2,
+                        "parentIndex": 0,
+                        "direction": 3,
+                        "axis": 2,
+                        "localPosition": {
+                            "x": -0.2826078236103058,
+                            "y": -0.4596158266067505,
+                            "z": -0.2655203938484192
+                        },
+                        "localEuler": {
+                            "x": 90.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 2,
+                        "shape": 1,
+                        "parentIndex": 1,
+                        "direction": 0,
+                        "axis": 2,
+                        "localPosition": {
+                            "x": 0.333406001329422,
+                            "y": -0.4596158266067505,
+                            "z": -0.2655203938484192
+                        },
+                        "localEuler": {
+                            "x": 90.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 3,
+                        "shape": 0,
+                        "parentIndex": 2,
+                        "direction": 4,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": 0.333406001329422,
+                            "y": -0.4596158266067505,
+                            "z": 0.4788721799850464
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    }
+                ]
+            },
+            {
+                "objectId": "OBJ20260830_L27E1",
+                "seed": 20260833,
+                "baseObjectId": "OBJ20260830",
+                "derivedLevel": 3,
+                "retainedEdges": 0,
+                "parts": [
+                    {
+                        "index": 0,
+                        "shape": 3,
+                        "parentIndex": -1,
+                        "direction": 0,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": -0.25495919585227969,
+                            "y": -0.3124390244483948,
+                            "z": -0.3058522343635559
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 1,
+                        "shape": 2,
+                        "parentIndex": 0,
+                        "direction": 2,
+                        "axis": 2,
+                        "localPosition": {
+                            "x": -0.25495919585227969,
+                            "y": 0.4596158266067505,
+                            "z": -0.3058522343635559
+                        },
+                        "localEuler": {
+                            "x": 90.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 2,
+                        "shape": 1,
+                        "parentIndex": 1,
+                        "direction": 4,
+                        "axis": 0,
+                        "localPosition": {
+                            "x": -0.25495919585227969,
+                            "y": 0.4596158266067505,
+                            "z": 0.5280682444572449
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 90.0
+                        }
+                    },
+                    {
+                        "index": 3,
+                        "shape": 0,
+                        "parentIndex": 1,
+                        "direction": 0,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": 0.3699188530445099,
+                            "y": 0.4596158266067505,
+                            "z": -0.3058522343635559
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    }
+                ]
+            },
+            {
+                "objectId": "OBJ20260834",
+                "seed": 20260834,
+                "baseObjectId": "",
+                "derivedLevel": 0,
+                "retainedEdges": -1,
+                "parts": [
+                    {
+                        "index": 0,
+                        "shape": 0,
+                        "parentIndex": -1,
+                        "direction": 0,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": 0.2781757116317749,
+                            "y": 0.35521745681762698,
+                            "z": -0.2847624719142914
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 1,
+                        "shape": 2,
+                        "parentIndex": 0,
+                        "direction": 4,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": 0.2781757116317749,
+                            "y": 0.35521745681762698,
+                            "z": 0.34011557698249819
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 2,
+                        "shape": 3,
+                        "parentIndex": 0,
+                        "direction": 3,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": 0.2781757116317749,
+                            "y": -0.4213923215866089,
+                            "z": -0.2847624719142914
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 3,
+                        "shape": 1,
+                        "parentIndex": 1,
+                        "direction": 1,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": -0.3378381133079529,
+                            "y": 0.35521745681762698,
+                            "z": 0.34011557698249819
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    }
+                ]
+            },
+            {
+                "objectId": "OBJ20260834_L27E5",
+                "seed": 20260837,
+                "baseObjectId": "OBJ20260834",
+                "derivedLevel": 3,
+                "retainedEdges": 0,
+                "parts": [
+                    {
+                        "index": 0,
+                        "shape": 0,
+                        "parentIndex": -1,
+                        "direction": 0,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": -0.4296760857105255,
+                            "y": -0.5026691555976868,
+                            "z": -0.4574611485004425
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 1,
+                        "shape": 2,
+                        "parentIndex": 0,
+                        "direction": 2,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": -0.4296760857105255,
+                            "y": 0.3401155471801758,
+                            "z": -0.4574611485004425
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 2,
+                        "shape": 3,
+                        "parentIndex": 3,
+                        "direction": 4,
+                        "axis": 2,
+                        "localPosition": {
+                            "x": 0.31471648812294009,
+                            "y": -0.5026691555976868,
+                            "z": 0.31028440594673159
+                        },
+                        "localEuler": {
+                            "x": 90.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 3,
+                        "shape": 1,
+                        "parentIndex": 0,
+                        "direction": 0,
+                        "axis": 0,
+                        "localPosition": {
+                            "x": 0.31471648812294009,
+                            "y": -0.5026691555976868,
+                            "z": -0.4574611485004425
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 90.0
+                        }
+                    }
+                ]
+            },
+            {
+                "objectId": "OBJ20260884",
+                "seed": 20260884,
+                "baseObjectId": "",
+                "derivedLevel": 0,
+                "retainedEdges": -1,
+                "parts": [
+                    {
+                        "index": 0,
+                        "shape": 2,
+                        "parentIndex": -1,
+                        "direction": 0,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": -0.2781757414340973,
+                            "y": -0.4618932604789734,
+                            "z": 0.28703993558883669
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 1,
+                        "shape": 3,
+                        "parentIndex": 0,
+                        "direction": 2,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": -0.2781757414340973,
+                            "y": 0.5280682444572449,
+                            "z": 0.28703993558883669
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 2,
+                        "shape": 0,
+                        "parentIndex": 0,
+                        "direction": 5,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": -0.2781757414340973,
+                            "y": -0.4618932604789734,
+                            "z": -0.3378381133079529
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 3,
+                        "shape": 1,
+                        "parentIndex": 0,
+                        "direction": 0,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": 0.3378380835056305,
+                            "y": -0.4618932604789734,
+                            "z": 0.28703993558883669
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    }
+                ]
+            },
+            {
+                "objectId": "OBJ20260884_H2815",
+                "seed": 20260885,
+                "baseObjectId": "OBJ20260884",
+                "derivedLevel": 1,
+                "retainedEdges": 2,
+                "parts": [
+                    {
+                        "index": 0,
+                        "shape": 2,
+                        "parentIndex": -1,
+                        "direction": 0,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": -0.2826078236103058,
+                            "y": -0.4618932604789734,
+                            "z": 0.2848852872848511
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 1,
+                        "shape": 3,
+                        "parentIndex": 0,
+                        "direction": 2,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": -0.2826078236103058,
+                            "y": 0.5280682444572449,
+                            "z": 0.2848852872848511
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 2,
+                        "shape": 0,
+                        "parentIndex": 3,
+                        "direction": 5,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": 0.333406001329422,
+                            "y": -0.4618932604789734,
+                            "z": -0.3356834650039673
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 3,
+                        "shape": 1,
+                        "parentIndex": 0,
+                        "direction": 0,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": 0.333406001329422,
+                            "y": -0.4618932604789734,
+                            "z": 0.2848852872848511
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    }
+                ]
+            },
+            {
+                "objectId": "OBJ20260935",
+                "seed": 20260935,
+                "baseObjectId": "",
+                "derivedLevel": 0,
+                "retainedEdges": -1,
+                "parts": [
+                    {
+                        "index": 0,
+                        "shape": 0,
+                        "parentIndex": -1,
+                        "direction": 0,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": -0.2847624719142914,
+                            "y": -0.3552173972129822,
+                            "z": 0.4042770266532898
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 1,
+                        "shape": 3,
+                        "parentIndex": 0,
+                        "direction": 2,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": -0.2847624719142914,
+                            "y": 0.42139238119125368,
+                            "z": 0.4042770266532898
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 2,
+                        "shape": 1,
+                        "parentIndex": 0,
+                        "direction": 5,
+                        "axis": 2,
+                        "localPosition": {
+                            "x": -0.2847624719142914,
+                            "y": -0.3552173972129822,
+                            "z": -0.3401155471801758
+                        },
+                        "localEuler": {
+                            "x": 90.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 3,
+                        "shape": 2,
+                        "parentIndex": 0,
+                        "direction": 0,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": 0.34011557698249819,
+                            "y": -0.3552173972129822,
+                            "z": 0.4042770266532898
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    }
+                ]
+            },
+            {
+                "objectId": "OBJ20260935_L284A",
+                "seed": 20260938,
+                "baseObjectId": "OBJ20260935",
+                "derivedLevel": 3,
+                "retainedEdges": 0,
+                "parts": [
+                    {
+                        "index": 0,
+                        "shape": 0,
+                        "parentIndex": -1,
+                        "direction": 0,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": 0.3356834650039673,
+                            "y": 0.5236361622810364,
+                            "z": -0.3057573735713959
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 1,
+                        "shape": 3,
+                        "parentIndex": 3,
+                        "direction": 4,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": -0.2848852872848511,
+                            "y": -0.3102843165397644,
+                            "z": 0.3699188530445099
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 2,
+                        "shape": 1,
+                        "parentIndex": 0,
+                        "direction": 1,
+                        "axis": 2,
+                        "localPosition": {
+                            "x": -0.2848852872848511,
+                            "y": 0.5236361622810364,
+                            "z": -0.3057573735713959
+                        },
+                        "localEuler": {
+                            "x": 90.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 3,
+                        "shape": 2,
+                        "parentIndex": 2,
+                        "direction": 3,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": -0.2848852872848511,
+                            "y": -0.3102843165397644,
+                            "z": -0.3057573735713959
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    }
+                ]
+            },
+            {
+                "objectId": "OBJ20261043",
+                "seed": 20261043,
+                "baseObjectId": "",
+                "derivedLevel": 0,
+                "retainedEdges": -1,
+                "parts": [
+                    {
+                        "index": 0,
+                        "shape": 1,
+                        "parentIndex": -1,
+                        "direction": 0,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": 0.2803303599357605,
+                            "y": 0.26552045345306399,
+                            "z": -0.361082524061203
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 1,
+                        "shape": 3,
+                        "parentIndex": 0,
+                        "direction": 4,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": 0.2803303599357605,
+                            "y": 0.26552045345306399,
+                            "z": 0.31028440594673159
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 2,
+                        "shape": 2,
+                        "parentIndex": 0,
+                        "direction": 1,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": -0.3356834650039673,
+                            "y": 0.26552045345306399,
+                            "z": -0.361082524061203
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 3,
+                        "shape": 0,
+                        "parentIndex": 0,
+                        "direction": 3,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": 0.2803303599357605,
+                            "y": -0.4788721203804016,
+                            "z": -0.361082524061203
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    }
+                ]
+            },
+            {
+                "objectId": "OBJ20261043_L28B6",
+                "seed": 20261046,
+                "baseObjectId": "OBJ20261043",
+                "derivedLevel": 3,
+                "retainedEdges": 0,
+                "parts": [
+                    {
+                        "index": 0,
+                        "shape": 1,
+                        "parentIndex": -1,
+                        "direction": 0,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": 0.3147164583206177,
+                            "y": -0.4618932902812958,
+                            "z": -0.2826078236103058
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 2,
+                        "shape": 2,
+                        "parentIndex": 0,
+                        "direction": 4,
+                        "axis": 0,
+                        "localPosition": {
+                            "x": 0.3147164583206177,
+                            "y": -0.4618932902812958,
+                            "z": 0.333406001329422
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 90.0
+                        }
+                    },
+                    {
+                        "index": 1,
+                        "shape": 3,
+                        "parentIndex": 0,
+                        "direction": 2,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": 0.3147164583206177,
+                            "y": 0.4296761453151703,
+                            "z": -0.2826078236103058
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "index": 3,
+                        "shape": 0,
+                        "parentIndex": 2,
+                        "direction": 1,
+                        "axis": 1,
+                        "localPosition": {
+                            "x": -0.5280682444572449,
+                            "y": -0.4618932902812958,
+                            "z": 0.333406001329422
+                        },
+                        "localEuler": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "pairs": [
+        {
+            "baseObjectId": "OBJ20260830",
+            "variantObjectId": "OBJ20260830_L27E1",
+            "level": 3,
+            "retainedEdges": 0,
+            "iouPerAngle": [
+                0.4780941903591156,
+                0.39777955412864687,
+                0.444740891456604
+            ],
+            "symmetryScore": 0.0,
+            "boundingRadius": 1.3889245986938477
+        },
+        {
+            "baseObjectId": "OBJ20260834",
+            "variantObjectId": "OBJ20260834_L27E5",
+            "level": 3,
+            "retainedEdges": 0,
+            "iouPerAngle": [
+                0.4107874631881714,
+                0.19693925976753236,
+                0.34557172656059267
+            ],
+            "symmetryScore": 0.0,
+            "boundingRadius": 1.433836817741394
+        },
+        {
+            "baseObjectId": "OBJ20260884",
+            "variantObjectId": "OBJ20260884_H2815",
+            "level": 1,
+            "retainedEdges": 2,
+            "iouPerAngle": [
+                0.9923534989356995,
+                0.8532493114471436,
+                0.997856855392456
+            ],
+            "symmetryScore": 0.0,
+            "boundingRadius": 1.3908796310424805
+        },
+        {
+            "baseObjectId": "OBJ20260935",
+            "variantObjectId": "OBJ20260935_L284A",
+            "level": 3,
+            "retainedEdges": 0,
+            "iouPerAngle": [
+                0.43159985542297366,
+                0.49185383319854739,
+                0.4304486811161041
+            ],
+            "symmetryScore": 0.0,
+            "boundingRadius": 1.313826322555542
+        },
+        {
+            "baseObjectId": "OBJ20261043",
+            "variantObjectId": "OBJ20261043_L28B6",
+            "level": 3,
+            "retainedEdges": 0,
+            "iouPerAngle": [
+                0.43596187233924868,
+                0.4871470630168915,
+                0.4549127221107483
+            ],
+            "symmetryScore": 0.0,
+            "boundingRadius": 1.370802879333496
+        }
+    ]
+}

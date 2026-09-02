@@ -1,0 +1,85 @@
+# Unity-generated folders (recreated by the Editor)
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+/[Ee]xported[Oo]bj/
+/.gradle/
+
+# Project-local generated experiment output
+/SessionBackups/
+/PreflightReports/
+/Assets/_Recovery/
+/Data/
+/RawData/
+/ParticipantData/
+/ExperimentData/
+/Results/
+/Exports/
+/Captures/
+
+# Raw physiological recordings (large and potentially sensitive)
+*.xdf
+*.edf
+*.bdf
+*.set
+*.fdt
+*.vhdr
+*.vmrk
+*.eeg
+*.acq
+
+# Generated IDE and solution files
+/.vs/
+/.vscode/
+/.idea/
+*.csproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# Unity package/build exports and crash output
+/Assets/AssetStoreTools*
+*.unitypackage
+*.apk
+*.aab
+*.ipa
+sysinfo.txt
+crashlytics-build.properties
+mono_crash.*
+
+# Secrets and signing files
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+
+# Large archive files should be released separately, not committed
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
