@@ -38,7 +38,7 @@ namespace StimGen
     {
         Identical = 0, // Target：完全相同的物体 ID
         High = 1,      // 保留 6/7 条连接
-        Medium = 2,    // 保留 4-5/7 条连接
+        Medium = 2,    // 仅为旧 JSON 保留；当前 2 x 2 协议不使用
         Low = 3,       // 保留 0-3/7 条连接
     }
 
@@ -219,7 +219,7 @@ namespace StimGen
         /// <summary>完全相同的 Object ID，只改变呈现角度。</summary>
         Target = 0,
         HighNonTarget = 1,
-        MediumNonTarget = 2,
+        MediumNonTarget = 2, // 仅为旧 JSON 保留；当前 2 x 2 协议不使用
         LowNonTarget = 3,
         /// <summary>不可用：关系数不对，或没通过轮廓检查，或结构相同但零件朝向不同。</summary>
         Invalid = 4,

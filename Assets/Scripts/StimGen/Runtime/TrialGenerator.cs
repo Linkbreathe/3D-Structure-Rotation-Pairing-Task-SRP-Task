@@ -29,7 +29,7 @@ namespace StimGen
     /// <summary>
     /// Pairing trial generator。
     /// 每个 trial 独立生成 Reference A 和 Comparison B；不维护 t-2、ChainID 或 memory chain。
-    /// Non-target pair 从冻结的 StimulusBank 配对表中选择，保证 High / Medium / Low 的结构定义。
+    /// Non-target pair 从冻结的 StimulusBank 配对表中选择，保证 High / Low 的结构定义。
     /// </summary>
     public static class TrialGenerator
     {
@@ -220,8 +220,8 @@ namespace StimGen
                     continue;
                 }
 
-                float[] deltas = AssignRotations(blockIndex, trialCount, segmentOf,
-                                                 withinSegment, isTarget, rng);
+                float[] deltas = AssignRotations(blockIndex, sequenceIndex, trialCount, segmentOf,
+                                                 withinSegment, levels, isTarget, rng);
                 string[] references = new string[trialCount];
                 string[] comparisons = new string[trialCount];
                 string failure;
@@ -291,35 +291,66 @@ namespace StimGen
 
         // ------------------------------------------------------------------ pair rotations
 
-        /// <summary>把 0°/90°/180° 均衡分配到 pair，并让 boundary trial 也覆盖不同角度。</summary>
-        private static float[] AssignRotations(int blockIndex, int trialCount, int[] segmentOf,
-                                               int[] withinSegment, bool[] isTarget,
+        /// <summary>
+        /// 把 0°/180° 在 High/Low context 内均衡分配，并让 boundary trial 也覆盖不同角度。
+        /// 奇数 cell 用 sequence index 交替额外配额；四种 sequence 合计后，
+        /// 每个 Similarity × Rotation cell 恰好有 30 个 trial，且不受 block 顺序影响。
+        /// </summary>
+        private static float[] AssignRotations(int blockIndex, int sequenceIndex, int trialCount,
+                                               int[] segmentOf,
+                                               int[] withinSegment, SimilarityLevel[] levels,
+                                               bool[] isTarget,
                                                System.Random rng)
         {
             float[] options = ExperimentDesign.RotationOptions;
             int optionCount = options.Length;
+            SimilarityLevel[] activeLevels = ExperimentDesign.ActiveSimilarityLevels;
+            int levelCount = activeLevels.Length;
             var deltas = new float[trialCount];
             var assigned = new bool[trialCount];
 
-            int perOption = trialCount / optionCount;
-            var remaining = new int[optionCount];
-            for (int i = 0; i < optionCount; i++) remaining[i] = perOption;
-            for (int i = 0; i < trialCount - perOption * optionCount; i++) remaining[i]++;
+            var levelOfTrial = new int[trialCount];
+            var levelTotals = new int[levelCount];
+            for (int i = 0; i < trialCount; i++)
+            {
+                SimilarityLevel level = levels[segmentOf[i]];
+                int levelIndex = ActiveLevelIndex(activeLevels, level);
+                if (levelIndex < 0)
+                    throw new InvalidOperationException(
+                        "Block sequence contains inactive similarity level: " + level);
+                levelOfTrial[i] = levelIndex;
+                levelTotals[levelIndex]++;
+            }
+
+            var remaining = new int[levelCount, optionCount];
+            for (int level = 0; level < levelCount; level++)
+            {
+                int perOption = levelTotals[level] / optionCount;
+                for (int option = 0; option < optionCount; option++)
+                    remaining[level, option] = perOption;
+                int extras = levelTotals[level] - perOption * optionCount;
+                for (int extra = 0; extra < extras; extra++)
+                {
+                    int option = (sequenceIndex + level + extra) % optionCount;
+                    remaining[level, option]++;
+                }
+            }
 
             int boundaryOrdinal = 0;
             for (int i = 0; i < trialCount; i++)
             {
                 if (segmentOf[i] == 0 || withinSegment[i] != 0) continue;
+                int level = levelOfTrial[i];
                 int pick = (blockIndex + boundaryOrdinal) % optionCount;
-                for (int k = 0; k < optionCount && remaining[pick] == 0; k++)
+                for (int k = 0; k < optionCount && remaining[level, pick] == 0; k++)
                     pick = (pick + 1) % optionCount;
                 deltas[i] = options[pick];
                 assigned[i] = true;
-                remaining[pick]--;
+                remaining[level, pick]--;
                 boundaryOrdinal++;
             }
 
-            var used = new int[2, optionCount];
+            var used = new int[2, levelCount, optionCount];
             var order = new List<int>();
             for (int i = 0; i < trialCount; i++) if (!assigned[i]) order.Add(i);
             ObjectGenerator.Shuffle(order, rng);
@@ -328,23 +359,33 @@ namespace StimGen
             {
                 int i = order[oi];
                 int group = isTarget[i] ? 1 : 0;
+                int level = levelOfTrial[i];
                 int best = -1, bestUsed = int.MaxValue;
                 for (int k = 0; k < optionCount; k++)
                 {
-                    if (remaining[k] == 0) continue;
-                    if (used[group, k] < bestUsed ||
-                        (used[group, k] == bestUsed && rng.Next(2) == 0))
+                    if (remaining[level, k] == 0) continue;
+                    if (used[group, level, k] < bestUsed ||
+                        (used[group, level, k] == bestUsed && rng.Next(2) == 0))
                     {
                         best = k;
-                        bestUsed = used[group, k];
+                        bestUsed = used[group, level, k];
                     }
                 }
-                if (best < 0) best = 0;
+                if (best < 0)
+                    throw new InvalidOperationException(
+                        "Rotation quota exhausted before all trials were assigned.");
                 deltas[i] = options[best];
-                remaining[best]--;
-                used[group, best]++;
+                remaining[level, best]--;
+                used[group, level, best]++;
             }
             return deltas;
+        }
+
+        private static int ActiveLevelIndex(SimilarityLevel[] levels, SimilarityLevel value)
+        {
+            for (int i = 0; i < levels.Length; i++)
+                if (levels[i] == value) return i;
+            return -1;
         }
 
         // ------------------------------------------------------------------ pair selection
@@ -449,9 +490,10 @@ namespace StimGen
 
         private static bool HasEnoughCandidates(StimulusBank bank, string id, int minPerLevel)
         {
-            return bank.CandidateCount(id, SimilarityLevel.High) >= minPerLevel
-                && bank.CandidateCount(id, SimilarityLevel.Medium) >= minPerLevel
-                && bank.CandidateCount(id, SimilarityLevel.Low) >= minPerLevel;
+            SimilarityLevel[] levels = ExperimentDesign.ActiveSimilarityLevels;
+            for (int i = 0; i < levels.Length; i++)
+                if (bank.CandidateCount(id, levels[i]) < minPerLevel) return false;
+            return true;
         }
 
         private static bool RecentlyUsed(string[] comparisons, int upTo,

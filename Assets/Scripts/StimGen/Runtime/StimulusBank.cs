@@ -5,7 +5,7 @@ using UnityEngine;
 namespace StimGen
 {
     /// <summary>
-    /// 一个物体家族：一个基准物体，加上从它派生的 High / Medium / Low 版本。
+    /// 一个物体家族：一个基准物体，加上从它派生的 High / Low 版本。
     /// 同一家族的所有版本使用完全相同的四个零件。
     /// </summary>
     [Serializable]
@@ -19,7 +19,7 @@ namespace StimGen
 
     /// <summary>
     /// 配对矩阵的一格：参照物体 a 与当前物体 b 之间已验证的关系。
-    /// 只保存可用的配对（High / Medium / Low），Invalid 不入库。
+    /// 只保存当前协议可用的配对（High / Low），Invalid 不入库。
     /// </summary>
     [Serializable]
     public class PairEntry
@@ -104,12 +104,12 @@ namespace StimGen
         }
 
         /// <summary>
-        /// 覆盖度报告：每个正式物体在三个等级上各有几个候选。
+        /// 覆盖度报告：每个正式物体在两个活动等级上各有几个候选。
         /// 计划要求每个物体每级至少 2 个，否则它不能出现在会继续成为参照的位置。
         /// </summary>
         public string CoverageReport(int minRequired = 2)
         {
-            var levels = new[] { SimilarityLevel.High, SimilarityLevel.Medium, SimilarityLevel.Low };
+            SimilarityLevel[] levels = ExperimentDesign.ActiveSimilarityLevels;
             var sb = new System.Text.StringBuilder();
             sb.AppendLine("配对覆盖度（每个正式物体的候选数）：");
 
@@ -191,7 +191,7 @@ namespace StimGen
             // 这种配对既不能当 Target（不是同一个 Object ID），也不该当 Non-target，直接排除。
             if (retained >= StimConfig.EdgeCount) return PairClass.Invalid;
 
-            var levels = new[] { SimilarityLevel.High, SimilarityLevel.Medium, SimilarityLevel.Low };
+            SimilarityLevel[] levels = ExperimentDesign.ActiveSimilarityLevels;
             for (int i = 0; i < levels.Length; i++)
             {
                 int min, max;

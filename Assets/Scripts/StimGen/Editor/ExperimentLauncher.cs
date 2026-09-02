@@ -78,7 +78,7 @@ namespace StimGen
                 : "FORMAL MODE / 正式模式：有效回答只显示中性的“已记录”；" +
                   "未作答会明确提示，但不会透露正式题目的正确答案。",
                 practice ? MessageType.Info : MessageType.None);
-            EditorGUILayout.LabelField("旋转协议", "Pair 内 X轴差 0° / 90° / 180° + Y轴观看自转");
+            EditorGUILayout.LabelField("旋转协议", "Pair 内 X轴差 0° / 180° + Y轴观看自转");
             EditorGUILayout.LabelField("Pairing 时序", "A " +
                 runner.referenceDuration.ToString("F1") + " 秒 → B " +
                 runner.comparisonDuration.ToString("F1") + " 秒");

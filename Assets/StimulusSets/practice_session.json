@@ -2,10 +2,10 @@
     "participantId": "PRACTICE",
     "participantNumber": 0,
     "masterSeed": 20351850,
-    "generatedUtc": "2026-08-30T17:10:06.6341647Z",
-    "bankId": "2026-08-25T12:12:26.1712182Z",
-    "taskProtocolVersion": "Pairing_Similarity_Transition_v1",
-    "rotationProtocolVersion": "Pair_XDelta_0_90_180_YSpin_v1",
+    "generatedUtc": "2026-09-02T18:33:49.1872227Z",
+    "bankId": "2026-09-02T18:28:29.2641131Z",
+    "taskProtocolVersion": "Pairing_Similarity_Transition_2x2_v1",
+    "rotationProtocolVersion": "Pair_XDelta_0_180_YSpin_v1",
     "swapResponseKeys": false,
     "blockOrder": [
         0
@@ -43,11 +43,11 @@
                     "referenceFamilyId": "P000",
                     "comparisonFamilyId": "P000",
                     "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
-                    "stimulusBankVersion": "2026-08-25T12:12:26.1712182Z",
-                    "stimulusSeed": 20261023,
+                    "stimulusBankVersion": "2026-09-02T18:28:29.2641131Z",
+                    "stimulusSeed": 20260968,
                     "partCount": 4,
-                    "referenceRelationSignature": "Cube>Cylinder@YPlus|Cylinder>Capsule@XMinus|Cylinder>Ellipsoid@ZPlus",
-                    "comparisonRelationSignature": "Cube>Cylinder@YPlus|Cylinder>Capsule@XMinus|Cylinder>Ellipsoid@ZMinus",
+                    "referenceRelationSignature": "Capsule>Ellipsoid@XPlus|Cube>Capsule@ZMinus|Cylinder>Capsule@YPlus",
+                    "comparisonRelationSignature": "Capsule>Ellipsoid@XMinus|Cube>Capsule@ZMinus|Cylinder>Capsule@YPlus",
                     "trialPairType": 1,
                     "retainedRelations": 2,
                     "structuralDistance": 1,
@@ -87,17 +87,17 @@
                     "referenceFamilyId": "P000",
                     "comparisonFamilyId": "P000",
                     "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
-                    "stimulusBankVersion": "2026-08-25T12:12:26.1712182Z",
-                    "stimulusSeed": 20261023,
+                    "stimulusBankVersion": "2026-09-02T18:28:29.2641131Z",
+                    "stimulusSeed": 20260968,
                     "partCount": 4,
-                    "referenceRelationSignature": "Cube>Cylinder@YPlus|Cylinder>Capsule@XMinus|Cylinder>Ellipsoid@ZMinus",
-                    "comparisonRelationSignature": "Cube>Cylinder@YPlus|Cylinder>Capsule@XMinus|Cylinder>Ellipsoid@ZMinus",
+                    "referenceRelationSignature": "Capsule>Ellipsoid@XMinus|Cube>Capsule@ZMinus|Cylinder>Capsule@YPlus",
+                    "comparisonRelationSignature": "Capsule>Ellipsoid@XMinus|Cube>Capsule@ZMinus|Cylinder>Capsule@YPlus",
                     "trialPairType": 0,
                     "retainedRelations": 3,
                     "structuralDistance": 0,
                     "referenceRotationX": 0.0,
-                    "comparisonRotationX": 90.0,
-                    "rotationDeltaX": 90.0,
+                    "comparisonRotationX": 180.0,
+                    "rotationDeltaX": 180.0,
                     "conditionRotationAxis": "X",
                     "presentationAnimationAxis": "Y",
                     "referenceObjectPriorExposures": 1,
@@ -126,22 +126,22 @@
                     "isFirstTrialAfterBoundary": false,
                     "trialsSinceTransition": -1,
                     "boundaryPositionWithinBlock": -1,
-                    "referenceObjectId": "P000_M",
-                    "comparisonObjectId": "P003_L",
+                    "referenceObjectId": "P000_L",
+                    "comparisonObjectId": "P001_H",
                     "referenceFamilyId": "P000",
-                    "comparisonFamilyId": "P003",
+                    "comparisonFamilyId": "P001",
                     "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
-                    "stimulusBankVersion": "2026-08-25T12:12:26.1712182Z",
-                    "stimulusSeed": 20261059,
+                    "stimulusBankVersion": "2026-09-02T18:28:29.2641131Z",
+                    "stimulusSeed": 20260980,
                     "partCount": 4,
-                    "referenceRelationSignature": "Capsule>Ellipsoid@ZPlus|Cube>Capsule@YMinus|Cylinder>Capsule@XMinus",
-                    "comparisonRelationSignature": "Cube>Capsule@YMinus|Cylinder>Capsule@XMinus|Cylinder>Ellipsoid@ZPlus",
+                    "referenceRelationSignature": "Cube>Capsule@YPlus|Cube>Cylinder@XMinus|Cube>Ellipsoid@ZPlus",
+                    "comparisonRelationSignature": "Cube>Capsule@YPlus|Cube>Cylinder@XMinus|Cylinder>Ellipsoid@ZMinus",
                     "trialPairType": 1,
                     "retainedRelations": 2,
                     "structuralDistance": 1,
                     "referenceRotationX": 0.0,
-                    "comparisonRotationX": 180.0,
-                    "rotationDeltaX": 180.0,
+                    "comparisonRotationX": 0.0,
+                    "rotationDeltaX": 0.0,
                     "conditionRotationAxis": "X",
                     "presentationAnimationAxis": "Y",
                     "referenceObjectPriorExposures": 0,
@@ -164,38 +164,38 @@
                     "segmentIndex": 0,
                     "trialIndexWithinSegment": 3,
                     "previousSegmentSimilarity": 0,
-                    "segmentSimilarity": 2,
+                    "segmentSimilarity": 3,
                     "similarityTransition": "",
                     "isNoOpBoundary": false,
                     "isFirstTrialAfterBoundary": false,
                     "trialsSinceTransition": -1,
                     "boundaryPositionWithinBlock": -1,
-                    "referenceObjectId": "P000_L",
-                    "comparisonObjectId": "P001_M",
-                    "referenceFamilyId": "P000",
+                    "referenceObjectId": "P001_B",
+                    "comparisonObjectId": "P001_L",
+                    "referenceFamilyId": "P001",
                     "comparisonFamilyId": "P001",
                     "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
-                    "stimulusBankVersion": "2026-08-25T12:12:26.1712182Z",
-                    "stimulusSeed": 20261036,
+                    "stimulusBankVersion": "2026-09-02T18:28:29.2641131Z",
+                    "stimulusSeed": 20260981,
                     "partCount": 4,
-                    "referenceRelationSignature": "Cube>Capsule@YPlus|Cube>Ellipsoid@XPlus|Cylinder>Capsule@ZMinus",
-                    "comparisonRelationSignature": "Cube>Capsule@YPlus|Cube>Ellipsoid@ZPlus|Cylinder>Ellipsoid@XMinus",
-                    "trialPairType": 2,
-                    "retainedRelations": 1,
-                    "structuralDistance": 2,
+                    "referenceRelationSignature": "Capsule>Ellipsoid@YPlus|Cube>Cylinder@XMinus|Cylinder>Ellipsoid@ZMinus",
+                    "comparisonRelationSignature": "Cube>Capsule@ZPlus|Cube>Ellipsoid@XPlus|Cylinder>Ellipsoid@YPlus",
+                    "trialPairType": 3,
+                    "retainedRelations": 0,
+                    "structuralDistance": 3,
                     "referenceRotationX": 0.0,
-                    "comparisonRotationX": 0.0,
-                    "rotationDeltaX": 0.0,
+                    "comparisonRotationX": 180.0,
+                    "rotationDeltaX": 180.0,
                     "conditionRotationAxis": "X",
                     "presentationAnimationAxis": "Y",
                     "referenceObjectPriorExposures": 0,
                     "comparisonObjectPriorExposures": 0,
-                    "referenceFamilyPriorExposures": 5,
-                    "comparisonFamilyPriorExposures": 0,
+                    "referenceFamilyPriorExposures": 1,
+                    "comparisonFamilyPriorExposures": 1,
                     "trialsSinceReferenceObjectLastSeen": -1,
                     "trialsSinceComparisonObjectLastSeen": -1,
                     "trialsSinceReferenceFamilyLastSeen": 0,
-                    "trialsSinceComparisonFamilyLastSeen": -1,
+                    "trialsSinceComparisonFamilyLastSeen": 0,
                     "expectedSame": false
                 },
                 {
@@ -214,30 +214,30 @@
                     "isFirstTrialAfterBoundary": false,
                     "trialsSinceTransition": -1,
                     "boundaryPositionWithinBlock": -1,
-                    "referenceObjectId": "P001_B",
-                    "comparisonObjectId": "P001_B",
+                    "referenceObjectId": "P001_H",
+                    "comparisonObjectId": "P001_H",
                     "referenceFamilyId": "P001",
                     "comparisonFamilyId": "P001",
                     "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
-                    "stimulusBankVersion": "2026-08-25T12:12:26.1712182Z",
-                    "stimulusSeed": 20261029,
+                    "stimulusBankVersion": "2026-09-02T18:28:29.2641131Z",
+                    "stimulusSeed": 20260980,
                     "partCount": 4,
-                    "referenceRelationSignature": "Cube>Capsule@ZPlus|Cylinder>Capsule@YMinus|Cylinder>Ellipsoid@XMinus",
-                    "comparisonRelationSignature": "Cube>Capsule@ZPlus|Cylinder>Capsule@YMinus|Cylinder>Ellipsoid@XMinus",
+                    "referenceRelationSignature": "Cube>Capsule@YPlus|Cube>Cylinder@XMinus|Cylinder>Ellipsoid@ZMinus",
+                    "comparisonRelationSignature": "Cube>Capsule@YPlus|Cube>Cylinder@XMinus|Cylinder>Ellipsoid@ZMinus",
                     "trialPairType": 0,
                     "retainedRelations": 3,
                     "structuralDistance": 0,
                     "referenceRotationX": 0.0,
-                    "comparisonRotationX": 90.0,
-                    "rotationDeltaX": 90.0,
+                    "comparisonRotationX": 0.0,
+                    "rotationDeltaX": 0.0,
                     "conditionRotationAxis": "X",
                     "presentationAnimationAxis": "Y",
-                    "referenceObjectPriorExposures": 0,
-                    "comparisonObjectPriorExposures": 0,
-                    "referenceFamilyPriorExposures": 1,
-                    "comparisonFamilyPriorExposures": 1,
-                    "trialsSinceReferenceObjectLastSeen": -1,
-                    "trialsSinceComparisonObjectLastSeen": -1,
+                    "referenceObjectPriorExposures": 1,
+                    "comparisonObjectPriorExposures": 1,
+                    "referenceFamilyPriorExposures": 3,
+                    "comparisonFamilyPriorExposures": 3,
+                    "trialsSinceReferenceObjectLastSeen": 1,
+                    "trialsSinceComparisonObjectLastSeen": 1,
                     "trialsSinceReferenceFamilyLastSeen": 0,
                     "trialsSinceComparisonFamilyLastSeen": 0,
                     "expectedSame": true
@@ -252,38 +252,38 @@
                     "segmentIndex": 0,
                     "trialIndexWithinSegment": 5,
                     "previousSegmentSimilarity": 0,
-                    "segmentSimilarity": 2,
+                    "segmentSimilarity": 3,
                     "similarityTransition": "",
                     "isNoOpBoundary": false,
                     "isFirstTrialAfterBoundary": false,
                     "trialsSinceTransition": -1,
                     "boundaryPositionWithinBlock": -1,
-                    "referenceObjectId": "P001_H",
-                    "comparisonObjectId": "P001_M",
+                    "referenceObjectId": "P001_L",
+                    "comparisonObjectId": "P002_B",
                     "referenceFamilyId": "P001",
-                    "comparisonFamilyId": "P001",
+                    "comparisonFamilyId": "P002",
                     "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
-                    "stimulusBankVersion": "2026-08-25T12:12:26.1712182Z",
-                    "stimulusSeed": 20261036,
+                    "stimulusBankVersion": "2026-09-02T18:28:29.2641131Z",
+                    "stimulusSeed": 20260983,
                     "partCount": 4,
-                    "referenceRelationSignature": "Cube>Cylinder@ZPlus|Cylinder>Capsule@YMinus|Cylinder>Ellipsoid@XMinus",
-                    "comparisonRelationSignature": "Cube>Capsule@YPlus|Cube>Ellipsoid@ZPlus|Cylinder>Ellipsoid@XMinus",
-                    "trialPairType": 2,
-                    "retainedRelations": 1,
-                    "structuralDistance": 2,
+                    "referenceRelationSignature": "Cube>Capsule@ZPlus|Cube>Ellipsoid@XPlus|Cylinder>Ellipsoid@YPlus",
+                    "comparisonRelationSignature": "Capsule>Ellipsoid@XPlus|Cube>Ellipsoid@YPlus|Cylinder>Ellipsoid@ZMinus",
+                    "trialPairType": 3,
+                    "retainedRelations": 0,
+                    "structuralDistance": 3,
                     "referenceRotationX": 0.0,
                     "comparisonRotationX": 180.0,
                     "rotationDeltaX": 180.0,
                     "conditionRotationAxis": "X",
                     "presentationAnimationAxis": "Y",
-                    "referenceObjectPriorExposures": 0,
-                    "comparisonObjectPriorExposures": 1,
-                    "referenceFamilyPriorExposures": 3,
-                    "comparisonFamilyPriorExposures": 3,
-                    "trialsSinceReferenceObjectLastSeen": -1,
-                    "trialsSinceComparisonObjectLastSeen": 1,
+                    "referenceObjectPriorExposures": 1,
+                    "comparisonObjectPriorExposures": 0,
+                    "referenceFamilyPriorExposures": 5,
+                    "comparisonFamilyPriorExposures": 0,
+                    "trialsSinceReferenceObjectLastSeen": 1,
+                    "trialsSinceComparisonObjectLastSeen": -1,
                     "trialsSinceReferenceFamilyLastSeen": 0,
-                    "trialsSinceComparisonFamilyLastSeen": 0,
+                    "trialsSinceComparisonFamilyLastSeen": -1,
                     "expectedSame": false
                 },
                 {
@@ -296,34 +296,34 @@
                     "segmentIndex": 0,
                     "trialIndexWithinSegment": 6,
                     "previousSegmentSimilarity": 0,
-                    "segmentSimilarity": 3,
+                    "segmentSimilarity": 1,
                     "similarityTransition": "",
                     "isNoOpBoundary": false,
                     "isFirstTrialAfterBoundary": false,
                     "trialsSinceTransition": -1,
                     "boundaryPositionWithinBlock": -1,
-                    "referenceObjectId": "P001_M",
-                    "comparisonObjectId": "P001_L",
-                    "referenceFamilyId": "P001",
-                    "comparisonFamilyId": "P001",
+                    "referenceObjectId": "P002_B",
+                    "comparisonObjectId": "P002_H",
+                    "referenceFamilyId": "P002",
+                    "comparisonFamilyId": "P002",
                     "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
-                    "stimulusBankVersion": "2026-08-25T12:12:26.1712182Z",
-                    "stimulusSeed": 20261041,
+                    "stimulusBankVersion": "2026-09-02T18:28:29.2641131Z",
+                    "stimulusSeed": 20260984,
                     "partCount": 4,
-                    "referenceRelationSignature": "Cube>Capsule@YPlus|Cube>Ellipsoid@ZPlus|Cylinder>Ellipsoid@XMinus",
-                    "comparisonRelationSignature": "Capsule>Ellipsoid@ZPlus|Cube>Ellipsoid@YMinus|Cylinder>Ellipsoid@XPlus",
-                    "trialPairType": 3,
-                    "retainedRelations": 0,
-                    "structuralDistance": 3,
+                    "referenceRelationSignature": "Capsule>Ellipsoid@XPlus|Cube>Ellipsoid@YPlus|Cylinder>Ellipsoid@ZMinus",
+                    "comparisonRelationSignature": "Capsule>Ellipsoid@XPlus|Cube>Cylinder@ZPlus|Cube>Ellipsoid@YPlus",
+                    "trialPairType": 1,
+                    "retainedRelations": 2,
+                    "structuralDistance": 1,
                     "referenceRotationX": 0.0,
                     "comparisonRotationX": 0.0,
                     "rotationDeltaX": 0.0,
                     "conditionRotationAxis": "X",
                     "presentationAnimationAxis": "Y",
-                    "referenceObjectPriorExposures": 2,
+                    "referenceObjectPriorExposures": 1,
                     "comparisonObjectPriorExposures": 0,
-                    "referenceFamilyPriorExposures": 5,
-                    "comparisonFamilyPriorExposures": 5,
+                    "referenceFamilyPriorExposures": 1,
+                    "comparisonFamilyPriorExposures": 1,
                     "trialsSinceReferenceObjectLastSeen": 0,
                     "trialsSinceComparisonObjectLastSeen": -1,
                     "trialsSinceReferenceFamilyLastSeen": 0,
@@ -346,28 +346,28 @@
                     "isFirstTrialAfterBoundary": false,
                     "trialsSinceTransition": -1,
                     "boundaryPositionWithinBlock": -1,
-                    "referenceObjectId": "P001_L",
-                    "comparisonObjectId": "P001_L",
-                    "referenceFamilyId": "P001",
-                    "comparisonFamilyId": "P001",
+                    "referenceObjectId": "P002_H",
+                    "comparisonObjectId": "P002_H",
+                    "referenceFamilyId": "P002",
+                    "comparisonFamilyId": "P002",
                     "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
-                    "stimulusBankVersion": "2026-08-25T12:12:26.1712182Z",
-                    "stimulusSeed": 20261041,
+                    "stimulusBankVersion": "2026-09-02T18:28:29.2641131Z",
+                    "stimulusSeed": 20260984,
                     "partCount": 4,
-                    "referenceRelationSignature": "Capsule>Ellipsoid@ZPlus|Cube>Ellipsoid@YMinus|Cylinder>Ellipsoid@XPlus",
-                    "comparisonRelationSignature": "Capsule>Ellipsoid@ZPlus|Cube>Ellipsoid@YMinus|Cylinder>Ellipsoid@XPlus",
+                    "referenceRelationSignature": "Capsule>Ellipsoid@XPlus|Cube>Cylinder@ZPlus|Cube>Ellipsoid@YPlus",
+                    "comparisonRelationSignature": "Capsule>Ellipsoid@XPlus|Cube>Cylinder@ZPlus|Cube>Ellipsoid@YPlus",
                     "trialPairType": 0,
                     "retainedRelations": 3,
                     "structuralDistance": 0,
                     "referenceRotationX": 0.0,
-                    "comparisonRotationX": 90.0,
-                    "rotationDeltaX": 90.0,
+                    "comparisonRotationX": 180.0,
+                    "rotationDeltaX": 180.0,
                     "conditionRotationAxis": "X",
                     "presentationAnimationAxis": "Y",
                     "referenceObjectPriorExposures": 1,
                     "comparisonObjectPriorExposures": 1,
-                    "referenceFamilyPriorExposures": 7,
-                    "comparisonFamilyPriorExposures": 7,
+                    "referenceFamilyPriorExposures": 3,
+                    "comparisonFamilyPriorExposures": 3,
                     "trialsSinceReferenceObjectLastSeen": 0,
                     "trialsSinceComparisonObjectLastSeen": 0,
                     "trialsSinceReferenceFamilyLastSeen": 0,
@@ -384,28 +384,28 @@
                     "segmentIndex": 0,
                     "trialIndexWithinSegment": 8,
                     "previousSegmentSimilarity": 0,
-                    "segmentSimilarity": 3,
+                    "segmentSimilarity": 1,
                     "similarityTransition": "",
                     "isNoOpBoundary": false,
                     "isFirstTrialAfterBoundary": false,
                     "trialsSinceTransition": -1,
                     "boundaryPositionWithinBlock": -1,
-                    "referenceObjectId": "P002_B",
-                    "comparisonObjectId": "P002_L",
-                    "referenceFamilyId": "P002",
-                    "comparisonFamilyId": "P002",
+                    "referenceObjectId": "P003_B",
+                    "comparisonObjectId": "P003_H",
+                    "referenceFamilyId": "P003",
+                    "comparisonFamilyId": "P003",
                     "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
-                    "stimulusBankVersion": "2026-08-25T12:12:26.1712182Z",
-                    "stimulusSeed": 20261050,
+                    "stimulusBankVersion": "2026-09-02T18:28:29.2641131Z",
+                    "stimulusSeed": 20260994,
                     "partCount": 4,
-                    "referenceRelationSignature": "Cube>Capsule@YPlus|Cube>Cylinder@XMinus|Cube>Ellipsoid@ZPlus",
-                    "comparisonRelationSignature": "Capsule>Ellipsoid@ZPlus|Cube>Ellipsoid@XPlus|Cylinder>Capsule@YPlus",
-                    "trialPairType": 3,
-                    "retainedRelations": 0,
-                    "structuralDistance": 3,
+                    "referenceRelationSignature": "Cube>Capsule@YMinus|Cylinder>Capsule@ZPlus|Cylinder>Ellipsoid@XMinus",
+                    "comparisonRelationSignature": "Cube>Capsule@YPlus|Cylinder>Capsule@ZPlus|Cylinder>Ellipsoid@XMinus",
+                    "trialPairType": 1,
+                    "retainedRelations": 2,
+                    "structuralDistance": 1,
                     "referenceRotationX": 0.0,
-                    "comparisonRotationX": 180.0,
-                    "rotationDeltaX": 180.0,
+                    "comparisonRotationX": 0.0,
+                    "rotationDeltaX": 0.0,
                     "conditionRotationAxis": "X",
                     "presentationAnimationAxis": "Y",
                     "referenceObjectPriorExposures": 0,
@@ -428,36 +428,36 @@
                     "segmentIndex": 0,
                     "trialIndexWithinSegment": 9,
                     "previousSegmentSimilarity": 0,
-                    "segmentSimilarity": 1,
+                    "segmentSimilarity": 3,
                     "similarityTransition": "",
                     "isNoOpBoundary": false,
                     "isFirstTrialAfterBoundary": false,
                     "trialsSinceTransition": -1,
                     "boundaryPositionWithinBlock": -1,
-                    "referenceObjectId": "P002_H",
-                    "comparisonObjectId": "P002_B",
-                    "referenceFamilyId": "P002",
-                    "comparisonFamilyId": "P002",
+                    "referenceObjectId": "P003_B",
+                    "comparisonObjectId": "P003_L",
+                    "referenceFamilyId": "P003",
+                    "comparisonFamilyId": "P003",
                     "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
-                    "stimulusBankVersion": "2026-08-25T12:12:26.1712182Z",
-                    "stimulusSeed": 20261042,
+                    "stimulusBankVersion": "2026-09-02T18:28:29.2641131Z",
+                    "stimulusSeed": 20260996,
                     "partCount": 4,
-                    "referenceRelationSignature": "Cube>Capsule@YPlus|Cube>Ellipsoid@ZPlus|Cylinder>Ellipsoid@XMinus",
-                    "comparisonRelationSignature": "Cube>Capsule@YPlus|Cube>Cylinder@XMinus|Cube>Ellipsoid@ZPlus",
-                    "trialPairType": 1,
-                    "retainedRelations": 2,
-                    "structuralDistance": 1,
+                    "referenceRelationSignature": "Cube>Capsule@YMinus|Cylinder>Capsule@ZPlus|Cylinder>Ellipsoid@XMinus",
+                    "comparisonRelationSignature": "Capsule>Ellipsoid@YPlus|Cube>Capsule@ZMinus|Cube>Cylinder@XPlus",
+                    "trialPairType": 3,
+                    "retainedRelations": 0,
+                    "structuralDistance": 3,
                     "referenceRotationX": 0.0,
-                    "comparisonRotationX": 0.0,
-                    "rotationDeltaX": 0.0,
+                    "comparisonRotationX": 180.0,
+                    "rotationDeltaX": 180.0,
                     "conditionRotationAxis": "X",
                     "presentationAnimationAxis": "Y",
-                    "referenceObjectPriorExposures": 0,
-                    "comparisonObjectPriorExposures": 1,
+                    "referenceObjectPriorExposures": 1,
+                    "comparisonObjectPriorExposures": 0,
                     "referenceFamilyPriorExposures": 2,
                     "comparisonFamilyPriorExposures": 2,
-                    "trialsSinceReferenceObjectLastSeen": -1,
-                    "trialsSinceComparisonObjectLastSeen": 0,
+                    "trialsSinceReferenceObjectLastSeen": 0,
+                    "trialsSinceComparisonObjectLastSeen": -1,
                     "trialsSinceReferenceFamilyLastSeen": 0,
                     "trialsSinceComparisonFamilyLastSeen": 0,
                     "expectedSame": false
@@ -478,30 +478,30 @@
                     "isFirstTrialAfterBoundary": false,
                     "trialsSinceTransition": -1,
                     "boundaryPositionWithinBlock": -1,
-                    "referenceObjectId": "P002_M",
-                    "comparisonObjectId": "P002_M",
-                    "referenceFamilyId": "P002",
-                    "comparisonFamilyId": "P002",
+                    "referenceObjectId": "P003_H",
+                    "comparisonObjectId": "P003_H",
+                    "referenceFamilyId": "P003",
+                    "comparisonFamilyId": "P003",
                     "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
-                    "stimulusBankVersion": "2026-08-25T12:12:26.1712182Z",
-                    "stimulusSeed": 20261046,
+                    "stimulusBankVersion": "2026-09-02T18:28:29.2641131Z",
+                    "stimulusSeed": 20260994,
                     "partCount": 4,
-                    "referenceRelationSignature": "Cube>Cylinder@XMinus|Cube>Ellipsoid@YMinus|Cylinder>Capsule@ZPlus",
-                    "comparisonRelationSignature": "Cube>Cylinder@XMinus|Cube>Ellipsoid@YMinus|Cylinder>Capsule@ZPlus",
+                    "referenceRelationSignature": "Cube>Capsule@YPlus|Cylinder>Capsule@ZPlus|Cylinder>Ellipsoid@XMinus",
+                    "comparisonRelationSignature": "Cube>Capsule@YPlus|Cylinder>Capsule@ZPlus|Cylinder>Ellipsoid@XMinus",
                     "trialPairType": 0,
                     "retainedRelations": 3,
                     "structuralDistance": 0,
                     "referenceRotationX": 0.0,
-                    "comparisonRotationX": 90.0,
-                    "rotationDeltaX": 90.0,
+                    "comparisonRotationX": 0.0,
+                    "rotationDeltaX": 0.0,
                     "conditionRotationAxis": "X",
                     "presentationAnimationAxis": "Y",
-                    "referenceObjectPriorExposures": 0,
-                    "comparisonObjectPriorExposures": 0,
+                    "referenceObjectPriorExposures": 1,
+                    "comparisonObjectPriorExposures": 1,
                     "referenceFamilyPriorExposures": 4,
                     "comparisonFamilyPriorExposures": 4,
-                    "trialsSinceReferenceObjectLastSeen": -1,
-                    "trialsSinceComparisonObjectLastSeen": -1,
+                    "trialsSinceReferenceObjectLastSeen": 1,
+                    "trialsSinceComparisonObjectLastSeen": 1,
                     "trialsSinceReferenceFamilyLastSeen": 0,
                     "trialsSinceComparisonFamilyLastSeen": 0,
                     "expectedSame": true
@@ -516,25 +516,25 @@
                     "segmentIndex": 0,
                     "trialIndexWithinSegment": 11,
                     "previousSegmentSimilarity": 0,
-                    "segmentSimilarity": 2,
+                    "segmentSimilarity": 3,
                     "similarityTransition": "",
                     "isNoOpBoundary": false,
                     "isFirstTrialAfterBoundary": false,
                     "trialsSinceTransition": -1,
                     "boundaryPositionWithinBlock": -1,
-                    "referenceObjectId": "P002_L",
-                    "comparisonObjectId": "P003_B",
-                    "referenceFamilyId": "P002",
-                    "comparisonFamilyId": "P003",
+                    "referenceObjectId": "P003_L",
+                    "comparisonObjectId": "P004_B",
+                    "referenceFamilyId": "P003",
+                    "comparisonFamilyId": "P004",
                     "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
-                    "stimulusBankVersion": "2026-08-25T12:12:26.1712182Z",
-                    "stimulusSeed": 20261054,
+                    "stimulusBankVersion": "2026-09-02T18:28:29.2641131Z",
+                    "stimulusSeed": 20260998,
                     "partCount": 4,
-                    "referenceRelationSignature": "Capsule>Ellipsoid@ZPlus|Cube>Ellipsoid@XPlus|Cylinder>Capsule@YPlus",
-                    "comparisonRelationSignature": "Cube>Cylinder@ZPlus|Cylinder>Capsule@YPlus|Cylinder>Ellipsoid@XMinus",
-                    "trialPairType": 2,
-                    "retainedRelations": 1,
-                    "structuralDistance": 2,
+                    "referenceRelationSignature": "Capsule>Ellipsoid@YPlus|Cube>Capsule@ZMinus|Cube>Cylinder@XPlus",
+                    "comparisonRelationSignature": "Cube>Capsule@XMinus|Cube>Cylinder@YMinus|Cylinder>Ellipsoid@ZPlus",
+                    "trialPairType": 3,
+                    "retainedRelations": 0,
+                    "structuralDistance": 3,
                     "referenceRotationX": 0.0,
                     "comparisonRotationX": 180.0,
                     "rotationDeltaX": 180.0,
@@ -543,11 +543,11 @@
                     "referenceObjectPriorExposures": 1,
                     "comparisonObjectPriorExposures": 0,
                     "referenceFamilyPriorExposures": 6,
-                    "comparisonFamilyPriorExposures": 1,
-                    "trialsSinceReferenceObjectLastSeen": 2,
+                    "comparisonFamilyPriorExposures": 0,
+                    "trialsSinceReferenceObjectLastSeen": 1,
                     "trialsSinceComparisonObjectLastSeen": -1,
                     "trialsSinceReferenceFamilyLastSeen": 0,
-                    "trialsSinceComparisonFamilyLastSeen": 8,
+                    "trialsSinceComparisonFamilyLastSeen": -1,
                     "expectedSame": false
                 }
             ]
@@ -556,7 +556,7 @@
     "objects": [
         {
             "objectId": "P000_B",
-            "seed": 20261022,
+            "seed": 20260967,
             "familyId": "P000",
             "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
             "isPractice": true,
@@ -571,9 +571,9 @@
                     "direction": 0,
                     "axis": 2,
                     "localPosition": {
-                        "x": -0.3356834650039673,
-                        "y": 0.29860788583755495,
-                        "z": -0.2544066309928894
+                        "x": -0.3632371723651886,
+                        "y": 0.2781757116317749,
+                        "z": -0.31471651792526247
                     },
                     "localEuler": {
                         "x": 90.0,
@@ -583,14 +583,14 @@
                 },
                 {
                     "index": 1,
-                    "shape": 1,
+                    "shape": 0,
                     "parentIndex": 0,
-                    "direction": 0,
+                    "direction": 4,
                     "axis": 1,
                     "localPosition": {
-                        "x": 0.2803303599357605,
-                        "y": 0.29860788583755495,
-                        "z": -0.2544066309928894
+                        "x": -0.3632371723651886,
+                        "y": 0.2781757116317749,
+                        "z": 0.5280681848526001
                     },
                     "localEuler": {
                         "x": 0.0,
@@ -600,34 +600,34 @@
                 },
                 {
                     "index": 2,
-                    "shape": 0,
-                    "parentIndex": 1,
-                    "direction": 3,
-                    "axis": 1,
+                    "shape": 3,
+                    "parentIndex": 0,
+                    "direction": 0,
+                    "axis": 2,
                     "localPosition": {
-                        "x": 0.2803303599357605,
-                        "y": -0.44578468799591067,
-                        "z": -0.2544066309928894
+                        "x": 0.31243905425071719,
+                        "y": 0.2781757116317749,
+                        "z": -0.31471651792526247
                     },
                     "localEuler": {
-                        "x": 0.0,
+                        "x": 90.0,
                         "y": 0.0,
                         "z": 0.0
                     }
                 },
                 {
                     "index": 3,
-                    "shape": 3,
-                    "parentIndex": 1,
-                    "direction": 4,
-                    "axis": 1,
+                    "shape": 1,
+                    "parentIndex": 0,
+                    "direction": 3,
+                    "axis": 2,
                     "localPosition": {
-                        "x": 0.2803303599357605,
-                        "y": 0.29860788583755495,
-                        "z": 0.41696029901504519
+                        "x": -0.3632371723651886,
+                        "y": -0.3378381133079529,
+                        "z": -0.31471651792526247
                     },
                     "localEuler": {
-                        "x": 0.0,
+                        "x": 90.0,
                         "y": 0.0,
                         "z": 0.0
                     }
@@ -636,7 +636,7 @@
         },
         {
             "objectId": "P000_H",
-            "seed": 20261023,
+            "seed": 20260968,
             "familyId": "P000",
             "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
             "isPractice": true,
@@ -651,9 +651,9 @@
                     "direction": 0,
                     "axis": 2,
                     "localPosition": {
-                        "x": -0.3356834650039673,
-                        "y": 0.29860788583755495,
-                        "z": 0.2544066905975342
+                        "x": 0.363237202167511,
+                        "y": 0.22998636960983277,
+                        "z": -0.31471651792526247
                     },
                     "localEuler": {
                         "x": 90.0,
@@ -663,14 +663,14 @@
                 },
                 {
                     "index": 1,
-                    "shape": 1,
+                    "shape": 0,
                     "parentIndex": 0,
-                    "direction": 0,
+                    "direction": 4,
                     "axis": 1,
                     "localPosition": {
-                        "x": 0.2803303599357605,
-                        "y": 0.29860788583755495,
-                        "z": 0.2544066905975342
+                        "x": 0.363237202167511,
+                        "y": 0.22998636960983277,
+                        "z": 0.5280681848526001
                     },
                     "localEuler": {
                         "x": 0.0,
@@ -680,14 +680,14 @@
                 },
                 {
                     "index": 2,
-                    "shape": 0,
-                    "parentIndex": 1,
-                    "direction": 3,
+                    "shape": 3,
+                    "parentIndex": 0,
+                    "direction": 1,
                     "axis": 1,
                     "localPosition": {
-                        "x": 0.2803303599357605,
-                        "y": -0.44578468799591067,
-                        "z": 0.2544066905975342
+                        "x": -0.3124390244483948,
+                        "y": 0.22998636960983277,
+                        "z": -0.31471651792526247
                     },
                     "localEuler": {
                         "x": 0.0,
@@ -697,17 +697,17 @@
                 },
                 {
                     "index": 3,
-                    "shape": 3,
-                    "parentIndex": 1,
-                    "direction": 5,
-                    "axis": 1,
+                    "shape": 1,
+                    "parentIndex": 0,
+                    "direction": 3,
+                    "axis": 2,
                     "localPosition": {
-                        "x": 0.2803303599357605,
-                        "y": 0.29860788583755495,
-                        "z": -0.4169602394104004
+                        "x": 0.363237202167511,
+                        "y": -0.386027455329895,
+                        "z": -0.31471651792526247
                     },
                     "localEuler": {
-                        "x": 0.0,
+                        "x": 90.0,
                         "y": 0.0,
                         "z": 0.0
                     }
@@ -716,7 +716,7 @@
         },
         {
             "objectId": "P000_L",
-            "seed": 20261026,
+            "seed": 20260974,
             "familyId": "P000",
             "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
             "isPractice": true,
@@ -731,9 +731,9 @@
                     "direction": 0,
                     "axis": 2,
                     "localPosition": {
-                        "x": -0.40441349148750307,
+                        "x": 0.23226386308670045,
                         "y": 0.3401155471801758,
-                        "z": -0.3058522343635559
+                        "z": -0.2588387131690979
                     },
                     "localEuler": {
                         "x": 90.0,
@@ -743,94 +743,14 @@
                 },
                 {
                     "index": 1,
-                    "shape": 1,
-                    "parentIndex": 0,
-                    "direction": 4,
-                    "axis": 0,
-                    "localPosition": {
-                        "x": -0.40441349148750307,
-                        "y": 0.3401155471801758,
-                        "z": 0.5280682444572449
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 90.0
-                    }
-                },
-                {
-                    "index": 2,
                     "shape": 0,
                     "parentIndex": 0,
                     "direction": 3,
                     "axis": 1,
                     "localPosition": {
-                        "x": -0.40441349148750307,
+                        "x": 0.23226386308670045,
                         "y": -0.28476250171661379,
-                        "z": -0.3058522343635559
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 0.0
-                    }
-                },
-                {
-                    "index": 3,
-                    "shape": 3,
-                    "parentIndex": 2,
-                    "direction": 0,
-                    "axis": 0,
-                    "localPosition": {
-                        "x": 0.3721962869167328,
-                        "y": -0.28476250171661379,
-                        "z": -0.3058522343635559
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 90.0
-                    }
-                }
-            ]
-        },
-        {
-            "objectId": "P000_M",
-            "seed": 20261024,
-            "familyId": "P000",
-            "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
-            "isPractice": true,
-            "baseObjectId": "P000_B",
-            "derivedLevel": 2,
-            "retainedEdges": 1,
-            "parts": [
-                {
-                    "index": 0,
-                    "shape": 2,
-                    "parentIndex": -1,
-                    "direction": 0,
-                    "axis": 2,
-                    "localPosition": {
-                        "x": -0.2781757414340973,
-                        "y": -0.23885059356689454,
-                        "z": -0.36551469564437868
-                    },
-                    "localEuler": {
-                        "x": 90.0,
-                        "y": 0.0,
-                        "z": 0.0
-                    }
-                },
-                {
-                    "index": 1,
-                    "shape": 1,
-                    "parentIndex": 0,
-                    "direction": 0,
-                    "axis": 1,
-                    "localPosition": {
-                        "x": 0.3378380835056305,
-                        "y": -0.23885059356689454,
-                        "z": -0.36551469564437868
+                        "z": -0.2588387131690979
                     },
                     "localEuler": {
                         "x": 0.0,
@@ -840,34 +760,34 @@
                 },
                 {
                     "index": 2,
-                    "shape": 0,
-                    "parentIndex": 0,
-                    "direction": 2,
-                    "axis": 1,
+                    "shape": 3,
+                    "parentIndex": 1,
+                    "direction": 4,
+                    "axis": 0,
                     "localPosition": {
-                        "x": -0.2781757414340973,
-                        "y": 0.386027455329895,
-                        "z": -0.36551469564437868
+                        "x": 0.23226386308670045,
+                        "y": -0.28476250171661379,
+                        "z": 0.42139238119125368
                     },
                     "localEuler": {
                         "x": 0.0,
                         "y": 0.0,
-                        "z": 0.0
+                        "z": 90.0
                     }
                 },
                 {
                     "index": 3,
-                    "shape": 3,
-                    "parentIndex": 0,
-                    "direction": 4,
-                    "axis": 1,
+                    "shape": 1,
+                    "parentIndex": 1,
+                    "direction": 1,
+                    "axis": 2,
                     "localPosition": {
-                        "x": -0.2781757414340973,
-                        "y": -0.23885059356689454,
-                        "z": 0.5280681848526001
+                        "x": -0.3883048892021179,
+                        "y": -0.28476250171661379,
+                        "z": -0.2588387131690979
                     },
                     "localEuler": {
-                        "x": 0.0,
+                        "x": 90.0,
                         "y": 0.0,
                         "z": 0.0
                     }
@@ -876,7 +796,7 @@
         },
         {
             "objectId": "P001_B",
-            "seed": 20261029,
+            "seed": 20260979,
             "familyId": "P001",
             "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
             "isPractice": true,
@@ -886,77 +806,77 @@
             "parts": [
                 {
                     "index": 0,
-                    "shape": 3,
+                    "shape": 1,
                     "parentIndex": -1,
                     "direction": 0,
-                    "axis": 2,
+                    "axis": 1,
                     "localPosition": {
-                        "x": -0.478872150182724,
-                        "y": 0.2826077938079834,
-                        "z": 0.23885059356689454
+                        "x": -0.2036084532737732,
+                        "y": 0.3101615905761719,
+                        "z": 0.3610825538635254
                     },
                     "localEuler": {
-                        "x": 90.0,
+                        "x": 0.0,
                         "y": 0.0,
                         "z": 0.0
                     }
                 },
                 {
                     "index": 1,
-                    "shape": 1,
+                    "shape": 0,
                     "parentIndex": 0,
                     "direction": 0,
-                    "axis": 0,
-                    "localPosition": {
-                        "x": 0.3163186013698578,
-                        "y": 0.2826077938079834,
-                        "z": 0.23885059356689454
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 90.0
-                    }
-                },
-                {
-                    "index": 2,
-                    "shape": 2,
-                    "parentIndex": 1,
-                    "direction": 3,
-                    "axis": 0,
-                    "localPosition": {
-                        "x": 0.3163186013698578,
-                        "y": -0.3334060311317444,
-                        "z": 0.23885059356689454
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 90.0
-                    }
-                },
-                {
-                    "index": 3,
-                    "shape": 0,
-                    "parentIndex": 2,
-                    "direction": 5,
                     "axis": 1,
                     "localPosition": {
-                        "x": 0.3163186013698578,
-                        "y": -0.3334060311317444,
-                        "z": -0.386027455329895
+                        "x": 0.41696029901504519,
+                        "y": 0.3101615905761719,
+                        "z": 0.3610825538635254
                     },
                     "localEuler": {
                         "x": 0.0,
                         "y": 0.0,
                         "z": 0.0
                     }
+                },
+                {
+                    "index": 2,
+                    "shape": 3,
+                    "parentIndex": 0,
+                    "direction": 5,
+                    "axis": 1,
+                    "localPosition": {
+                        "x": -0.2036084532737732,
+                        "y": 0.3101615905761719,
+                        "z": -0.3102843761444092
+                    },
+                    "localEuler": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                {
+                    "index": 3,
+                    "shape": 2,
+                    "parentIndex": 2,
+                    "direction": 3,
+                    "axis": 0,
+                    "localPosition": {
+                        "x": -0.2036084532737732,
+                        "y": -0.4618932604789734,
+                        "z": -0.3102843761444092
+                    },
+                    "localEuler": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 90.0
+                    }
                 }
             ]
         },
         {
             "objectId": "P001_H",
-            "seed": 20261035,
+            "seed": 20260980,
             "familyId": "P001",
             "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
             "isPractice": true,
@@ -966,77 +886,77 @@
             "parts": [
                 {
                     "index": 0,
-                    "shape": 3,
+                    "shape": 1,
                     "parentIndex": -1,
                     "direction": 0,
-                    "axis": 2,
+                    "axis": 1,
                     "localPosition": {
-                        "x": -0.478872150182724,
-                        "y": 0.2803303599357605,
-                        "z": 0.23669594526290894
+                        "x": -0.3915611803531647,
+                        "y": -0.23657315969467164,
+                        "z": 0.3610825538635254
                     },
                     "localEuler": {
-                        "x": 90.0,
+                        "x": 0.0,
                         "y": 0.0,
                         "z": 0.0
                     }
                 },
                 {
                     "index": 1,
-                    "shape": 1,
+                    "shape": 0,
                     "parentIndex": 0,
                     "direction": 0,
-                    "axis": 0,
-                    "localPosition": {
-                        "x": 0.3163186013698578,
-                        "y": 0.2803303599357605,
-                        "z": 0.23669594526290894
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 90.0
-                    }
-                },
-                {
-                    "index": 2,
-                    "shape": 2,
-                    "parentIndex": 1,
-                    "direction": 3,
-                    "axis": 0,
-                    "localPosition": {
-                        "x": 0.3163186013698578,
-                        "y": -0.3356834650039673,
-                        "z": 0.23669594526290894
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 90.0
-                    }
-                },
-                {
-                    "index": 3,
-                    "shape": 0,
-                    "parentIndex": 1,
-                    "direction": 5,
                     "axis": 1,
                     "localPosition": {
-                        "x": 0.3163186013698578,
-                        "y": 0.2803303599357605,
-                        "z": -0.3838728070259094
+                        "x": 0.2290075719356537,
+                        "y": -0.23657315969467164,
+                        "z": 0.3610825538635254
                     },
                     "localEuler": {
                         "x": 0.0,
                         "y": 0.0,
                         "z": 0.0
                     }
+                },
+                {
+                    "index": 2,
+                    "shape": 3,
+                    "parentIndex": 0,
+                    "direction": 5,
+                    "axis": 1,
+                    "localPosition": {
+                        "x": -0.3915611803531647,
+                        "y": -0.23657315969467164,
+                        "z": -0.3102843761444092
+                    },
+                    "localEuler": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                {
+                    "index": 3,
+                    "shape": 2,
+                    "parentIndex": 1,
+                    "direction": 2,
+                    "axis": 0,
+                    "localPosition": {
+                        "x": 0.2290075719356537,
+                        "y": 0.3883048892021179,
+                        "z": 0.3610825538635254
+                    },
+                    "localEuler": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 90.0
+                    }
                 }
             ]
         },
         {
             "objectId": "P001_L",
-            "seed": 20261041,
+            "seed": 20260981,
             "familyId": "P001",
             "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
             "isPractice": true,
@@ -1045,32 +965,32 @@
             "retainedEdges": 0,
             "parts": [
                 {
-                    "index": 0,
+                    "index": 2,
                     "shape": 3,
                     "parentIndex": -1,
                     "direction": 0,
-                    "axis": 2,
+                    "axis": 0,
                     "localPosition": {
-                        "x": 0.22457551956176759,
-                        "y": -0.28263571858406069,
-                        "z": 0.3101615905761719
+                        "x": 0.3147164583206177,
+                        "y": 0.34839928150177,
+                        "z": -0.2847624719142914
                     },
                     "localEuler": {
-                        "x": 90.0,
+                        "x": 0.0,
                         "y": 0.0,
-                        "z": 0.0
+                        "z": 90.0
                     }
                 },
                 {
                     "index": 1,
-                    "shape": 1,
-                    "parentIndex": 0,
+                    "shape": 0,
+                    "parentIndex": 2,
                     "direction": 1,
                     "axis": 1,
                     "localPosition": {
-                        "x": -0.446791410446167,
-                        "y": -0.28263571858406069,
-                        "z": 0.3101615905761719
+                        "x": -0.46189332008361819,
+                        "y": 0.34839928150177,
+                        "z": -0.2847624719142914
                     },
                     "localEuler": {
                         "x": 0.0,
@@ -1078,113 +998,33 @@
                         "z": 0.0
                     }
                 },
-                {
-                    "index": 2,
-                    "shape": 2,
-                    "parentIndex": 0,
-                    "direction": 5,
-                    "axis": 0,
-                    "localPosition": {
-                        "x": 0.22457551956176759,
-                        "y": -0.28263571858406069,
-                        "z": -0.4618932604789734
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 90.0
-                    }
-                },
-                {
-                    "index": 3,
-                    "shape": 0,
-                    "parentIndex": 0,
-                    "direction": 2,
-                    "axis": 1,
-                    "localPosition": {
-                        "x": 0.22457551956176759,
-                        "y": 0.3975953757762909,
-                        "z": 0.3101615905761719
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 0.0
-                    }
-                }
-            ]
-        },
-        {
-            "objectId": "P001_M",
-            "seed": 20261036,
-            "familyId": "P001",
-            "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
-            "isPractice": true,
-            "baseObjectId": "P001_B",
-            "derivedLevel": 2,
-            "retainedEdges": 1,
-            "parts": [
                 {
                     "index": 0,
-                    "shape": 3,
-                    "parentIndex": -1,
-                    "direction": 0,
-                    "axis": 2,
-                    "localPosition": {
-                        "x": -0.4296760857105255,
-                        "y": -0.2847624719142914,
-                        "z": 0.4213923215866089
-                    },
-                    "localEuler": {
-                        "x": 90.0,
-                        "y": 0.0,
-                        "z": 0.0
-                    }
-                },
-                {
-                    "index": 1,
                     "shape": 1,
-                    "parentIndex": 0,
-                    "direction": 0,
-                    "axis": 0,
+                    "parentIndex": 2,
+                    "direction": 3,
+                    "axis": 1,
                     "localPosition": {
-                        "x": 0.3655146658420563,
-                        "y": -0.2847624719142914,
-                        "z": 0.4213923215866089
+                        "x": 0.3147164583206177,
+                        "y": -0.44679147005081179,
+                        "z": -0.2847624719142914
                     },
                     "localEuler": {
                         "x": 0.0,
-                        "y": 0.0,
-                        "z": 90.0
-                    }
-                },
-                {
-                    "index": 2,
-                    "shape": 2,
-                    "parentIndex": 3,
-                    "direction": 2,
-                    "axis": 2,
-                    "localPosition": {
-                        "x": -0.4296760857105255,
-                        "y": 0.34011557698249819,
-                        "z": -0.35521745681762698
-                    },
-                    "localEuler": {
-                        "x": 90.0,
                         "y": 0.0,
                         "z": 0.0
                     }
                 },
                 {
                     "index": 3,
-                    "shape": 0,
-                    "parentIndex": 0,
-                    "direction": 5,
+                    "shape": 2,
+                    "parentIndex": 1,
+                    "direction": 4,
                     "axis": 1,
                     "localPosition": {
-                        "x": -0.4296760857105255,
-                        "y": -0.2847624719142914,
-                        "z": -0.35521745681762698
+                        "x": -0.46189332008361819,
+                        "y": 0.34839928150177,
+                        "z": 0.34011557698249819
                     },
                     "localEuler": {
                         "x": 0.0,
@@ -1196,7 +1036,7 @@
         },
         {
             "objectId": "P002_B",
-            "seed": 20261042,
+            "seed": 20260983,
             "familyId": "P002",
             "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
             "isPractice": true,
@@ -1206,17 +1046,17 @@
             "parts": [
                 {
                     "index": 0,
-                    "shape": 0,
+                    "shape": 2,
                     "parentIndex": -1,
                     "direction": 0,
-                    "axis": 1,
+                    "axis": 2,
                     "localPosition": {
-                        "x": 0.19917643070220948,
-                        "y": -0.25268176198005679,
-                        "z": -0.4618932902812958
+                        "x": -0.3975954055786133,
+                        "y": 0.3147164583206177,
+                        "z": -0.2727648615837097
                     },
                     "localEuler": {
-                        "x": 0.0,
+                        "x": 90.0,
                         "y": 0.0,
                         "z": 0.0
                     }
@@ -1225,12 +1065,12 @@
                     "index": 1,
                     "shape": 3,
                     "parentIndex": 0,
-                    "direction": 4,
+                    "direction": 0,
                     "axis": 2,
                     "localPosition": {
-                        "x": 0.19917643070220948,
-                        "y": -0.25268176198005679,
-                        "z": 0.31471648812294009
+                        "x": 0.2780808210372925,
+                        "y": 0.3147164583206177,
+                        "z": -0.2727648615837097
                     },
                     "localEuler": {
                         "x": 90.0,
@@ -1241,42 +1081,42 @@
                 {
                     "index": 2,
                     "shape": 1,
-                    "parentIndex": 0,
-                    "direction": 1,
-                    "axis": 1,
-                    "localPosition": {
-                        "x": -0.4213923215866089,
-                        "y": -0.25268176198005679,
-                        "z": -0.4618932902812958
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 0.0
-                    }
-                },
-                {
-                    "index": 3,
-                    "shape": 2,
-                    "parentIndex": 0,
-                    "direction": 2,
+                    "parentIndex": 1,
+                    "direction": 4,
                     "axis": 0,
                     "localPosition": {
-                        "x": 0.19917643070220948,
-                        "y": 0.3721962869167328,
-                        "z": -0.4618932902812958
+                        "x": 0.2780808210372925,
+                        "y": 0.3147164583206177,
+                        "z": 0.49498069286346438
                     },
                     "localEuler": {
                         "x": 0.0,
                         "y": 0.0,
                         "z": 90.0
                     }
+                },
+                {
+                    "index": 3,
+                    "shape": 0,
+                    "parentIndex": 1,
+                    "direction": 3,
+                    "axis": 1,
+                    "localPosition": {
+                        "x": 0.2780808210372925,
+                        "y": -0.3655146360397339,
+                        "z": -0.2727648615837097
+                    },
+                    "localEuler": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
                 }
             ]
         },
         {
             "objectId": "P002_H",
-            "seed": 20261043,
+            "seed": 20260984,
             "familyId": "P002",
             "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
             "isPractice": true,
@@ -1286,17 +1126,17 @@
             "parts": [
                 {
                     "index": 0,
-                    "shape": 0,
+                    "shape": 2,
                     "parentIndex": -1,
                     "direction": 0,
-                    "axis": 1,
+                    "axis": 2,
                     "localPosition": {
-                        "x": -0.2245754599571228,
-                        "y": -0.2847624719142914,
-                        "z": -0.4618932902812958
+                        "x": -0.3975954055786133,
+                        "y": 0.3147164583206177,
+                        "z": -0.1991763710975647
                     },
                     "localEuler": {
-                        "x": 0.0,
+                        "x": 90.0,
                         "y": 0.0,
                         "z": 0.0
                     }
@@ -1305,12 +1145,12 @@
                     "index": 1,
                     "shape": 3,
                     "parentIndex": 0,
-                    "direction": 4,
+                    "direction": 0,
                     "axis": 2,
                     "localPosition": {
-                        "x": -0.2245754599571228,
-                        "y": -0.2847624719142914,
-                        "z": 0.31471648812294009
+                        "x": 0.2780808210372925,
+                        "y": 0.3147164583206177,
+                        "z": -0.1991763710975647
                     },
                     "localEuler": {
                         "x": 90.0,
@@ -1321,190 +1161,30 @@
                 {
                     "index": 2,
                     "shape": 1,
-                    "parentIndex": 1,
-                    "direction": 0,
-                    "axis": 2,
-                    "localPosition": {
-                        "x": 0.44679147005081179,
-                        "y": -0.2847624719142914,
-                        "z": 0.31471648812294009
-                    },
-                    "localEuler": {
-                        "x": 90.0,
-                        "y": 0.0,
-                        "z": 0.0
-                    }
-                },
-                {
-                    "index": 3,
-                    "shape": 2,
-                    "parentIndex": 0,
-                    "direction": 2,
-                    "axis": 0,
-                    "localPosition": {
-                        "x": -0.2245754599571228,
-                        "y": 0.34011557698249819,
-                        "z": -0.4618932902812958
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 90.0
-                    }
-                }
-            ]
-        },
-        {
-            "objectId": "P002_L",
-            "seed": 20261050,
-            "familyId": "P002",
-            "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
-            "isPractice": true,
-            "baseObjectId": "P002_B",
-            "derivedLevel": 3,
-            "retainedEdges": 0,
-            "parts": [
-                {
-                    "index": 2,
-                    "shape": 1,
-                    "parentIndex": -1,
-                    "direction": 0,
-                    "axis": 1,
-                    "localPosition": {
-                        "x": 0.28162896633148196,
-                        "y": -0.33783814311027529,
-                        "z": -0.3655146360397339
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 0.0
-                    }
-                },
-                {
-                    "index": 3,
-                    "shape": 2,
-                    "parentIndex": 2,
-                    "direction": 2,
-                    "axis": 0,
-                    "localPosition": {
-                        "x": 0.28162896633148196,
-                        "y": 0.4019995629787445,
-                        "z": -0.3655146360397339
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 90.0
-                    }
-                },
-                {
-                    "index": 1,
-                    "shape": 3,
                     "parentIndex": 3,
                     "direction": 4,
                     "axis": 0,
                     "localPosition": {
-                        "x": 0.28162896633148196,
-                        "y": 0.4019995629787445,
-                        "z": 0.3101615905761719
+                        "x": 0.2780808210372925,
+                        "y": -0.3655146360397339,
+                        "z": 0.42139238119125368
                     },
                     "localEuler": {
                         "x": 0.0,
                         "y": 0.0,
                         "z": 90.0
-                    }
-                },
-                {
-                    "index": 0,
-                    "shape": 0,
-                    "parentIndex": 1,
-                    "direction": 1,
-                    "axis": 1,
-                    "localPosition": {
-                        "x": -0.4949808120727539,
-                        "y": 0.4019995629787445,
-                        "z": 0.3101615905761719
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 0.0
-                    }
-                }
-            ]
-        },
-        {
-            "objectId": "P002_M",
-            "seed": 20261046,
-            "familyId": "P002",
-            "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
-            "isPractice": true,
-            "baseObjectId": "P002_B",
-            "derivedLevel": 2,
-            "retainedEdges": 1,
-            "parts": [
-                {
-                    "index": 0,
-                    "shape": 0,
-                    "parentIndex": -1,
-                    "direction": 0,
-                    "axis": 1,
-                    "localPosition": {
-                        "x": 0.23441851139068604,
-                        "y": 0.2588387727737427,
-                        "z": -0.2803303897380829
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 0.0
-                    }
-                },
-                {
-                    "index": 1,
-                    "shape": 3,
-                    "parentIndex": 0,
-                    "direction": 3,
-                    "axis": 0,
-                    "localPosition": {
-                        "x": 0.23441851139068604,
-                        "y": -0.4213923215866089,
-                        "z": -0.2803303897380829
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 90.0
-                    }
-                },
-                {
-                    "index": 2,
-                    "shape": 1,
-                    "parentIndex": 0,
-                    "direction": 1,
-                    "axis": 1,
-                    "localPosition": {
-                        "x": -0.3861502408981323,
-                        "y": 0.2588387727737427,
-                        "z": -0.2803303897380829
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 0.0
                     }
                 },
                 {
                     "index": 3,
-                    "shape": 2,
-                    "parentIndex": 2,
-                    "direction": 4,
+                    "shape": 0,
+                    "parentIndex": 1,
+                    "direction": 3,
                     "axis": 1,
                     "localPosition": {
-                        "x": -0.3861502408981323,
-                        "y": 0.2588387727737427,
-                        "z": 0.3356834352016449
+                        "x": 0.2780808210372925,
+                        "y": -0.3655146360397339,
+                        "z": -0.1991763710975647
                     },
                     "localEuler": {
                         "x": 0.0,
@@ -1516,7 +1196,7 @@
         },
         {
             "objectId": "P003_B",
-            "seed": 20261054,
+            "seed": 20260993,
             "familyId": "P003",
             "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
             "isPractice": true,
@@ -1526,31 +1206,14 @@
             "parts": [
                 {
                     "index": 0,
-                    "shape": 1,
+                    "shape": 3,
                     "parentIndex": -1,
                     "direction": 0,
-                    "axis": 0,
-                    "localPosition": {
-                        "x": 0.4618932604789734,
-                        "y": -0.4982370436191559,
-                        "z": 0.2848852872848511
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 90.0
-                    }
-                },
-                {
-                    "index": 1,
-                    "shape": 2,
-                    "parentIndex": 0,
-                    "direction": 2,
                     "axis": 1,
                     "localPosition": {
-                        "x": 0.4618932604789734,
-                        "y": 0.3356834352016449,
-                        "z": 0.2848852872848511
+                        "x": -0.478872150182724,
+                        "y": -0.23885059356689454,
+                        "z": -0.2826078236103058
                     },
                     "localEuler": {
                         "x": 0.0,
@@ -1559,15 +1222,32 @@
                     }
                 },
                 {
-                    "index": 2,
-                    "shape": 3,
+                    "index": 1,
+                    "shape": 1,
                     "parentIndex": 0,
-                    "direction": 1,
+                    "direction": 0,
                     "axis": 0,
                     "localPosition": {
-                        "x": -0.4296761751174927,
-                        "y": -0.4982370436191559,
-                        "z": 0.2848852872848511
+                        "x": 0.3163186013698578,
+                        "y": -0.23885059356689454,
+                        "z": -0.2826078236103058
+                    },
+                    "localEuler": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 90.0
+                    }
+                },
+                {
+                    "index": 2,
+                    "shape": 2,
+                    "parentIndex": 1,
+                    "direction": 4,
+                    "axis": 0,
+                    "localPosition": {
+                        "x": 0.3163186013698578,
+                        "y": -0.23885059356689454,
+                        "z": 0.333406001329422
                     },
                     "localEuler": {
                         "x": 0.0,
@@ -1578,13 +1258,93 @@
                 {
                     "index": 3,
                     "shape": 0,
-                    "parentIndex": 0,
-                    "direction": 5,
+                    "parentIndex": 2,
+                    "direction": 2,
                     "axis": 1,
                     "localPosition": {
-                        "x": 0.4618932604789734,
-                        "y": -0.4982370436191559,
-                        "z": -0.3356834650039673
+                        "x": 0.3163186013698578,
+                        "y": 0.386027455329895,
+                        "z": 0.333406001329422
+                    },
+                    "localEuler": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                }
+            ]
+        },
+        {
+            "objectId": "P003_H",
+            "seed": 20260994,
+            "familyId": "P003",
+            "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
+            "isPractice": true,
+            "baseObjectId": "P003_B",
+            "derivedLevel": 1,
+            "retainedEdges": 2,
+            "parts": [
+                {
+                    "index": 0,
+                    "shape": 3,
+                    "parentIndex": -1,
+                    "direction": 0,
+                    "axis": 1,
+                    "localPosition": {
+                        "x": -0.478872150182724,
+                        "y": 0.23885059356689454,
+                        "z": -0.2826078236103058
+                    },
+                    "localEuler": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                {
+                    "index": 1,
+                    "shape": 1,
+                    "parentIndex": 0,
+                    "direction": 0,
+                    "axis": 0,
+                    "localPosition": {
+                        "x": 0.3163186013698578,
+                        "y": 0.23885059356689454,
+                        "z": -0.2826078236103058
+                    },
+                    "localEuler": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 90.0
+                    }
+                },
+                {
+                    "index": 2,
+                    "shape": 2,
+                    "parentIndex": 1,
+                    "direction": 4,
+                    "axis": 0,
+                    "localPosition": {
+                        "x": 0.3163186013698578,
+                        "y": 0.23885059356689454,
+                        "z": 0.333406001329422
+                    },
+                    "localEuler": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 90.0
+                    }
+                },
+                {
+                    "index": 3,
+                    "shape": 0,
+                    "parentIndex": 2,
+                    "direction": 3,
+                    "axis": 1,
+                    "localPosition": {
+                        "x": 0.3163186013698578,
+                        "y": -0.386027455329895,
+                        "z": 0.333406001329422
                     },
                     "localEuler": {
                         "x": 0.0,
@@ -1596,7 +1356,7 @@
         },
         {
             "objectId": "P003_L",
-            "seed": 20261059,
+            "seed": 20260996,
             "familyId": "P003",
             "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
             "isPractice": true,
@@ -1606,14 +1366,31 @@
             "parts": [
                 {
                     "index": 0,
-                    "shape": 1,
+                    "shape": 3,
                     "parentIndex": -1,
+                    "direction": 0,
+                    "axis": 1,
+                    "localPosition": {
+                        "x": -0.4042769968509674,
+                        "y": 0.5280681848526001,
+                        "z": -0.2870399057865143
+                    },
+                    "localEuler": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                {
+                    "index": 1,
+                    "shape": 1,
+                    "parentIndex": 3,
                     "direction": 0,
                     "axis": 0,
                     "localPosition": {
-                        "x": 0.29633045196533205,
-                        "y": -0.2870399057865143,
-                        "z": -0.2544066309928894
+                        "x": 0.34011557698249819,
+                        "y": -0.46189332008361819,
+                        "z": 0.33783814311027529
                     },
                     "localEuler": {
                         "x": 0.0,
@@ -1622,15 +1399,95 @@
                     }
                 },
                 {
-                    "index": 1,
+                    "index": 2,
                     "shape": 2,
                     "parentIndex": 0,
-                    "direction": 1,
+                    "direction": 3,
+                    "axis": 1,
+                    "localPosition": {
+                        "x": -0.4042769968509674,
+                        "y": -0.46189332008361819,
+                        "z": -0.2870399057865143
+                    },
+                    "localEuler": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                {
+                    "index": 3,
+                    "shape": 0,
+                    "parentIndex": 2,
+                    "direction": 4,
+                    "axis": 1,
+                    "localPosition": {
+                        "x": -0.4042769968509674,
+                        "y": -0.46189332008361819,
+                        "z": 0.33783814311027529
+                    },
+                    "localEuler": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                }
+            ]
+        },
+        {
+            "objectId": "P004_B",
+            "seed": 20260998,
+            "familyId": "P004",
+            "partSetId": "Cube+Cylinder+Capsule+Ellipsoidx1",
+            "isPractice": true,
+            "baseObjectId": "",
+            "derivedLevel": 0,
+            "retainedEdges": -1,
+            "parts": [
+                {
+                    "index": 0,
+                    "shape": 2,
+                    "parentIndex": -1,
+                    "direction": 0,
+                    "axis": 1,
+                    "localPosition": {
+                        "x": -0.3883048892021179,
+                        "y": 0.22900760173797608,
+                        "z": -0.3655146658420563
+                    },
+                    "localEuler": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                {
+                    "index": 1,
+                    "shape": 0,
+                    "parentIndex": 0,
+                    "direction": 0,
+                    "axis": 1,
+                    "localPosition": {
+                        "x": 0.23657315969467164,
+                        "y": 0.22900760173797608,
+                        "z": -0.3655146658420563
+                    },
+                    "localEuler": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                {
+                    "index": 2,
+                    "shape": 1,
+                    "parentIndex": 1,
+                    "direction": 3,
                     "axis": 2,
                     "localPosition": {
-                        "x": -0.44350725412368777,
-                        "y": -0.2870399057865143,
-                        "z": -0.2544066309928894
+                        "x": 0.23657315969467164,
+                        "y": -0.3915611505508423,
+                        "z": -0.3655146658420563
                     },
                     "localEuler": {
                         "x": 90.0,
@@ -1639,37 +1496,20 @@
                     }
                 },
                 {
-                    "index": 2,
+                    "index": 3,
                     "shape": 3,
-                    "parentIndex": 0,
+                    "parentIndex": 2,
                     "direction": 4,
                     "axis": 0,
                     "localPosition": {
-                        "x": 0.29633045196533205,
-                        "y": -0.2870399057865143,
-                        "z": 0.41696029901504519
+                        "x": 0.23657315969467164,
+                        "y": -0.3915611505508423,
+                        "z": 0.4296760857105255
                     },
                     "localEuler": {
                         "x": 0.0,
                         "y": 0.0,
                         "z": 90.0
-                    }
-                },
-                {
-                    "index": 3,
-                    "shape": 0,
-                    "parentIndex": 1,
-                    "direction": 2,
-                    "axis": 1,
-                    "localPosition": {
-                        "x": -0.44350725412368777,
-                        "y": 0.33783814311027529,
-                        "z": -0.2544066309928894
-                    },
-                    "localEuler": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 0.0
                     }
                 }
             ]

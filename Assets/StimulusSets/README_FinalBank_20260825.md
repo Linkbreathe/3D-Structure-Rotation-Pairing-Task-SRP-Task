@@ -1,32 +1,31 @@
-# StimGen 题库版本说明（2026-08-25）
+# StimGen 题库版本说明（更新于 2026-09-02）
 
-> **协议已更新（2026-08-30）：** 本文件中的旧 2-back / t-2 session 说明已被当前 Pairing 协议取代。
-> 当前运行规则请查看 `Docs/VR_Pairing_Similarity_Transition_Protocol_20260830.md`；题库本身仍可作为 Pairing 的冻结 stimulus bank 使用。
+> 当前运行规则请查看 `Docs/VR_Pairing_Similarity_Transition_Protocol_20260830.md`。题库和 session 已按 2×2 Pairing 协议重新生成。
 
 这是一批已经由生成器冻结、可以在 PC 版 Unity 中运行的实验刺激与 session 文件：
 
-- `stimulus_bank.json`：24 个正式家族、131 个正式物体、20 个练习物体，以及完整的结构配对矩阵。
+- `stimulus_bank.json`：24 个正式家族、97 个正式物体、15 个练习物体，以及只含 High/Low 的结构配对矩阵。
 - `session_P001.json` 到 `session_P024.json`：24 名受试者的固定 session。
-- 每份 session 有 6 个 block；每个 block 32 次呈现，其中前 2 次不计分；每份共 180 个 scored trials。
-- 每份 session 的 High、Medium、Low 各 60 个，X轴 RotationDelta 0°、90°、180° 各 60 个，Target 60 个、Non-target 120 个。
+- 每份 session 有 4 个 block；每个 block 30 个完整 Pairing trial；每份共 120 个 scored trials。
+- 每份 session 的 High、Low 各 60 个，X轴 RotationDelta 0°、180°各 60 个，四个交叉条件各 30 个，Target 40 个、Non-target 80 个。
 
 ## 旋转协议
 
-当前协议版本为 `XDelta_0_90_180_YSpin_v1`：
+当前协议版本为 `Pair_XDelta_0_180_YSpin_v1`：
 
-- 实验条件是当前物体相对 `t−2` 物体绕 X 轴的角度差：0°、90°或180°；
-- 每个 Block 的前两次初始化呈现均从 X 轴 0° 开始；之后沿两条 2-back 链累加 0°、90°、180° 的相对变化，因此不再引入 15° 等随机起始角度；
+- 每个 trial 独立比较 Reference A 与 Comparison B；B 相对 A 的 X 轴角度差为 0°或180°；
+- A 使用基准 X 角度，B 使用 `A + RotationDeltaX`，不依赖前一个 trial，也没有初始化呈现；
 - 外层 Y 轴完整自转是所有 trial 共用的观看动画，不参与 RotationDeltaX 计算；
-- Same / Different 只由当前 ObjectID 是否等于 `t−2` ObjectID 决定。
+- Same / Different 只由 A、B 的 ObjectID 是否相同决定。
 
 运行时层级为 `PresentationAnimationY → ConditionRotationX → Object`。CSV 分开保存
 X轴条件角度与Y轴动画参数，不能再把实验角度解释为 Yaw。
 
 ## 重要的实验状态
 
-High / Medium / Low 在本项目中仍然是结构条件：分别保留 2、1、0 条空间关系。自动视觉检查使用的是题库构建阶段的 Y轴 0°/45°/90° 观察视图，它独立于正式任务的 X轴 RotationDelta。视觉检查只淘汰明显遮挡或观察角度不一致的物体，不把未经真人 pilot 验证的轮廓 IoU 区间冒充成难度证明。正式招募前仍应按计划完成 6–8 人 pilot，并根据反应时、错误率和可理解性删除不合格配对。
+High / Low 在本项目中仍然是结构条件：分别保留 2、0 条空间关系。原 Medium（1/3）被排除，不并入 Low。自动视觉检查使用的是题库构建阶段的 Y轴 0°/45°/90° 观察视图，它独立于正式任务的 X轴 RotationDelta。视觉检查只淘汰明显遮挡或观察角度不一致的物体，不把未经真人 pilot 验证的轮廓 IoU 区间冒充成难度证明。正式招募前仍应按计划完成 pilot，并根据反应时、错误率和可理解性删除不合格配对。
 
-因此，这批文件可以称为“正式实验的生成版/试运行版题库”：程序结构、顺序和记录字段已经冻结；“High 比 Medium 难、Medium 比 Low 难”的经验结论仍需 pilot 验收。
+因此，这批文件可以称为“正式实验的生成版/试运行版题库”：程序结构、顺序和记录字段已经冻结；High 与 Low 是否产生预期的行为差异仍需 pilot 验收。
 
 ## 在 PC 版运行
 
@@ -34,10 +33,10 @@ High / Medium / Low 在本项目中仍然是结构条件：分别保留 2、1、
 
 在 Launcher 中：
 
-- 选择 `practice_session` 时，只显示 `运行练习 Session（12 个计分题）`；练习共 14 次呈现，前 2 次只观看，后 12 次计分；
+- 选择 `practice_session` 时，只显示 `运行 Pairing 练习（12 个 trial）`；12 次均为完整 Pairing trial；
 - 从下拉框选择 `session_Pxxx`，受试者编号会自动随 Session 更新；
 - `测试首个 Block`：只测试第一个 block；
-- `运行完整 Session`：运行全部 6 个 block；
+- `运行完整 Session`：运行全部 4 个 block；
 - `当前呈现结束后安全暂停`：不会在一个物体呈现到一半时切断 trial；
 - `继续当前实验`：从安全暂停处继续；
 - `从头重新开始当前 Session`：关闭当前日志并建立一个全新的日志，旧的部分记录不会被覆盖；

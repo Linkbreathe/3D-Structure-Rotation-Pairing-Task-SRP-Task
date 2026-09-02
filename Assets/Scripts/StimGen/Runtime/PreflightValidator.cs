@@ -71,6 +71,7 @@ namespace StimGen
             int expectedGlobalTrial = 0;
             var levelTrials = new Dictionary<SimilarityLevel, int>();
             var rotationTrials = new Dictionary<float, int>();
+            var conditionTrials = new Dictionary<string, int>();
             var transitionCounts = new Dictionary<string, int>();
             int boundaryCount = 0;
             int noOpCount = 0;
@@ -87,8 +88,12 @@ namespace StimGen
                 if (block.presentations.Count != ExperimentDesign.PresentationsPerBlock)
                     r.Error("block " + b + " trial 数 " + block.presentations.Count +
                             "，应为 " + ExperimentDesign.PresentationsPerBlock);
-                if (block.segmentLengths.Count != ExperimentDesign.SegmentCount)
+                if (block.segmentLengths == null ||
+                    block.segmentLengths.Count != ExperimentDesign.SegmentCount)
                     r.Error("block " + b + " segment 数不正确");
+                if (block.segmentSimilarity == null ||
+                    block.segmentSimilarity.Count != ExperimentDesign.SegmentCount)
+                    r.Error("block " + b + " similarity segment 数不正确");
 
                 int scored = 0;
                 int targets = 0;
@@ -119,6 +124,8 @@ namespace StimGen
                     if (p.IsTarget) targets++; else nonTargets++;
                     Increment(levelTrials, p.segmentSimilarity);
                     Increment(rotationTrials, p.rotationDeltaX);
+                    Increment(conditionTrials, ConditionKey(
+                        p.segmentSimilarity, p.rotationDeltaX));
 
                     if (p.isFirstTrialAfterBoundary)
                     {
@@ -155,21 +162,25 @@ namespace StimGen
             if (noOpCount != expectedBoundaries / 3)
                 r.Error("No-op 边界数 " + noOpCount + "，应为 " + expectedBoundaries / 3);
 
-            string[] directed =
+            var expectedTransitions = new Dictionary<string, int>
             {
-                "Low_to_Medium", "Medium_to_Low", "Medium_to_High",
-                "High_to_Medium", "Low_to_High", "High_to_Low",
+                { "Low_to_Low", 2 },
+                { "Low_to_High", 4 },
+                { "High_to_Low", 4 },
+                { "High_to_High", 2 },
             };
-            string[] noOps = { "Low_to_Low", "Medium_to_Medium", "High_to_High" };
-            for (int i = 0; i < directed.Length; i++)
-                CheckTransition(r, transitionCounts, directed[i], 2);
-            for (int i = 0; i < noOps.Length; i++)
-                CheckTransition(r, transitionCounts, noOps[i], 2);
+            foreach (KeyValuePair<string, int> expected in expectedTransitions)
+                CheckTransition(r, transitionCounts, expected.Key, expected.Value);
+            foreach (string actual in transitionCounts.Keys)
+                if (!expectedTransitions.ContainsKey(actual))
+                    r.Error("出现计划外的 transition：" + actual);
 
-            // 三个 context level 各 60 个 trial，rotation difference 各 60 个 trial。
+            // 两个 context level 各 60 个 trial，rotation difference 各 60 个 trial。
             CheckLevel(r, levelTrials, SimilarityLevel.Low, 60);
-            CheckLevel(r, levelTrials, SimilarityLevel.Medium, 60);
             CheckLevel(r, levelTrials, SimilarityLevel.High, 60);
+            foreach (SimilarityLevel actual in levelTrials.Keys)
+                if (!IsActiveSimilarity(actual))
+                    r.Error("出现计划外的 similarity level：" + actual);
             for (int i = 0; i < ExperimentDesign.RotationOptions.Length; i++)
             {
                 float rotation = ExperimentDesign.RotationOptions[i];
@@ -183,6 +194,22 @@ namespace StimGen
             foreach (float actual in rotationTrials.Keys)
                 if (!IsRotationOption(actual))
                     r.Error("出现计划外的 Pair RotationDelta：" + actual + "°");
+
+            SimilarityLevel[] activeLevels = ExperimentDesign.ActiveSimilarityLevels;
+            for (int level = 0; level < activeLevels.Length; level++)
+            {
+                for (int rotation = 0; rotation < ExperimentDesign.RotationOptions.Length;
+                     rotation++)
+                {
+                    string key = ConditionKey(activeLevels[level],
+                                              ExperimentDesign.RotationOptions[rotation]);
+                    int n;
+                    conditionTrials.TryGetValue(key, out n);
+                    r.Info(key + " trials：" + n);
+                    if (n != 30)
+                        r.Error(key + " trials " + n + "，应为 30");
+                }
+            }
 
             ValidateSessionObjects(plan, r);
             r.Info("Target 总数：" + CountTargets(plan) + "，Non-target 总数：" +
@@ -203,10 +230,21 @@ namespace StimGen
                 r.Error("block " + blockIndex + " trial " + trialIndex +
                         " 的 segment index 不正确");
 
+            if (block.segmentSimilarity == null ||
+                expectedSegment >= block.segmentSimilarity.Count)
+            {
+                r.Error("block " + blockIndex + " trial " + trialIndex +
+                        " 缺少对应的 similarity segment");
+                return;
+            }
+
             SimilarityLevel expectedLevel = block.segmentSimilarity[expectedSegment];
             if (p.segmentSimilarity != expectedLevel)
                 r.Error("block " + blockIndex + " trial " + trialIndex +
                         " 的 segment structural similarity 不正确");
+            if (!IsActiveSimilarity(expectedLevel))
+                r.Error("block " + blockIndex + " trial " + trialIndex +
+                        " 使用了非活动的 similarity level " + expectedLevel);
 
             if (expectedSegment == 0)
             {
@@ -352,6 +390,19 @@ namespace StimGen
             for (int i = 0; i < ExperimentDesign.RotationOptions.Length; i++)
                 if (Mathf.Approximately(angle, ExperimentDesign.RotationOptions[i])) return true;
             return false;
+        }
+
+        private static bool IsActiveSimilarity(SimilarityLevel level)
+        {
+            SimilarityLevel[] levels = ExperimentDesign.ActiveSimilarityLevels;
+            for (int i = 0; i < levels.Length; i++)
+                if (levels[i] == level) return true;
+            return false;
+        }
+
+        private static string ConditionKey(SimilarityLevel level, float rotation)
+        {
+            return level + "_Rotation" + Mathf.RoundToInt(rotation);
         }
 
         private static void Increment(Dictionary<SimilarityLevel, int> counts,

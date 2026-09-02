@@ -29,10 +29,10 @@ namespace StimGen
         public float mediumMaxIou = 0.75f;
         public float lowMaxIou = 0.50f;
 
-        // The study plan treats High/Medium/Low as structural conditions and
-        // requires pilot data to calibrate their perceptual difficulty.  Keep
-        // the IoU bands available for diagnostics, but allow the formal bank
-        // build to use silhouette/occlusion only as a gross sanity gate.
+        // The active protocol treats High/Low as structural conditions and
+        // requires pilot data to calibrate their perceptual difficulty. Medium
+        // thresholds remain serialized for legacy data only. Keep the IoU bands
+        // available for diagnostics and silhouette/occlusion as a sanity gate.
         public bool enforceLevelIouBands = true;
 
         [Tooltip("三个角度之间 IoU 的最大允许跨度，超过说明角度之间不一致")]

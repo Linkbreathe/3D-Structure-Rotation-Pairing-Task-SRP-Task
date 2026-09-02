@@ -1,4 +1,4 @@
-# StimGen Pairing 版实验协议（2026-08-30）
+# StimGen Pairing 2×2 实验协议（2026-09-02）
 
 本文件是当前 Unity 实现的权威协议说明。它取代早期的 VR 2-back 版本；旧文档仍保留作历史记录，不代表当前运行配置。
 
@@ -26,33 +26,36 @@ Reference A -> Comparison B -> Same / Different
 |---|---:|---|
 | Target | 同一 Object，3/3 | Same |
 | High | 2/3 | Different |
-| Medium | 1/3 | Different |
 | Low | 0/3 | Different |
+
+原 Medium（1/3）不并入 Low，而是从当前实验条件中排除。
 
 Similarity 在 segment 层面固定，四个 segment 的长度为 `8 + 7 + 8 + 7 = 30`。
 
 ### Rotation
 
-每个 pair 独立记录 `RotationDeltaX`，只取 `0° / 90° / 180°`。当前实现让 A 使用基准 X 角度，B 使用 `A + RotationDeltaX`（按 360°取模），所以角度是 pair 内的相对条件，不依赖前一个或 t-2 trial。
+每个 pair 独立记录 `RotationDeltaX`，只取 `0° / 180°`。当前实现让 A 使用基准 X 角度，B 使用 `A + RotationDeltaX`（按 360°取模），所以角度是 pair 内的相对条件，不依赖前一个或 t-2 trial。
 
 所有呈现都可以同时使用外层 Y 轴自转；Y animation 是观察方式，不是 X 轴实验条件。Y 自转对 Rotation 操纵的影响必须在 pilot 中重新检查。
 
 ## 3. Session 结构
 
-- 每位参与者 6 个 block。
+- 每位参与者 4 个 block。
 - 每个 block 4 个 segment，长度 `8 / 7 / 8 / 7`。
 - 每个 block 30 个完整 Pairing trial，全部 `scored=true`。
 - 每个 block 10 个 Target、20 个 Non-target。
-- 每位参与者共 180 个 scored trials。
+- 每位参与者共 120 个 scored trials。
 - 不再有 block 开头的 initialization trials；不再固定 segment 开头的 Non-target 来重建记忆链。
-- 保留现有 6 种 block sequence 和参与者间 block order counterbalancing。
+- 使用 4 种 block sequence（`LLHH / LHLH / HLHL / HHLL`）和参与者间 block order counterbalancing。
 
-四个 segment 之间继续形成 3 个 boundary。每位参与者共有 18 个 boundary；9 种 transition（L/M/H 的有向组合）各出现两次，其中 6 个是 no-op，12 个是 level change。
+四个 segment 之间继续形成 3 个 boundary。每位参与者共有 12 个 boundary：`Low_to_Low` 和 `High_to_High` 各 2 次，`Low_to_High` 和 `High_to_Low` 各 4 次；其中 4 个是 no-op，8 个是 level change。
+
+每人 High / Low 各 60 个 trial，0° / 180° 各 60 个 trial；四个 `Similarity × Rotation` cell 各 30 个 trial。Target 40 个，Non-target 80 个。
 
 ## 4. 当前协议版本与主要数据字段
 
-- `TaskProtocolVersion`: `Pairing_Similarity_Transition_v1`
-- `RotationProtocolVersion`: `Pair_XDelta_0_90_180_YSpin_v1`
+- `TaskProtocolVersion`: `Pairing_Similarity_Transition_2x2_v1`
+- `RotationProtocolVersion`: `Pair_XDelta_0_180_YSpin_v1`
 - 主记录一行代表一个完整 Pairing trial，而不是一次单物体 presentation。
 - 关键字段包括 `ReferenceObjectID`、`ComparisonObjectID`、两端 family/signature、`SegmentSimilarity`、`SimilarityTransition`、`RotationDeltaX`、两端 onset/offset 时间戳和 response。
 - 运行时 session 必须同时嵌入 A、B 两端用到的 ObjectDefinition。
@@ -92,7 +95,7 @@ Study 1 建立 user-state model 后，再比较：
 - performance-only Adaptive；
 - transition-aware Adaptive。
 
-模型不需要预测系统已经知道的 Low/Medium/High 标签，而应根据最近 trial 的 Accuracy、RT、Eye、EEG/ECG 与 transition history，预测 stable / adapting / struggling 或 future error probability。系统随后控制 Similarity 与 Rotation。
+模型不需要预测系统已经知道的 Low/High 标签，而应根据最近 trial 的 Accuracy、RT、Eye、EEG/ECG 与 transition history，预测 stable / adapting / struggling 或 future error probability。系统随后控制 Similarity 与 Rotation。
 
 ## 7. Pilot 验收重点
 
@@ -112,4 +115,4 @@ Study 1 建立 user-state model 后，再比较：
 4. 运行前通过 Launcher 的 session preflight；失败时不得进入实验。
 5. 练习 session 是独立的 Pairing 试次，不包含初始化呈现。
 
-正式 session 由 `session_P001.json` 至 `session_P024.json` 提供；生成后的文件必须满足上述 6 × 30、transition、similarity、rotation 和 A/B 完整性检查。代码/结构检查通过不等于 VR 人体 pilot 已通过。
+正式 session 由 `session_P001.json` 至 `session_P024.json` 提供；生成后的文件必须满足上述 4 × 30、transition、similarity、rotation 和 A/B 完整性检查。代码/结构检查通过不等于 VR 人体 pilot 已通过。

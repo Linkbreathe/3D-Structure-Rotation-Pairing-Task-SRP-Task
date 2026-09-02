@@ -46,10 +46,7 @@ namespace StimGen
             block.segmentSimilarity.Add(SimilarityLevel.Identical);
             block.segmentLengths.Add(scoredTrials);
 
-            SimilarityLevel[] desiredLevels =
-            {
-                SimilarityLevel.High, SimilarityLevel.Medium, SimilarityLevel.Low,
-            };
+            SimilarityLevel[] desiredLevels = ExperimentDesign.ActiveSimilarityLevels;
             var objectExposures = new Dictionary<string, int>();
             var familyExposures = new Dictionary<string, int>();
             var lastObjectTrial = new Dictionary<string, int>();
@@ -58,16 +55,24 @@ namespace StimGen
 
             for (int scored = 0; scored < scoredTrials; scored++)
             {
-                ObjectDefinition reference = bank.practiceObjects[
-                    scored % bank.practiceObjects.Count];
                 bool target = scored % 3 == 1;
-                ObjectDefinition comparison = target
-                    ? reference
-                    : FindPracticeNonTarget(bank.practiceObjects, reference,
-                        desiredLevels[(scored / 3) % desiredLevels.Length], scored);
-                if (comparison == null)
-                    throw new InvalidOperationException(
-                        "练习物体中找不到可用的 structural-similarity Non-target 配对。");
+                ObjectDefinition reference;
+                ObjectDefinition comparison;
+                if (target)
+                {
+                    reference = bank.practiceObjects[scored % bank.practiceObjects.Count];
+                    comparison = reference;
+                }
+                else
+                {
+                    SimilarityLevel desired =
+                        desiredLevels[(scored / 3) % desiredLevels.Length];
+                    if (!TryFindPracticePair(bank.practiceObjects, desired, scored,
+                                             out reference, out comparison))
+                        throw new InvalidOperationException(
+                            "练习物体中找不到 " + desired +
+                            " structural-similarity Non-target 配对。");
+                }
 
                 PairClass pairClass = PairClassifier.ClassifyStructural(reference, comparison);
                 if (pairClass == PairClass.Invalid ||
@@ -193,6 +198,11 @@ namespace StimGen
                     if (rows.Count != plan.ScoredTrialCount())
                         errors.Add("练习 Session 必须全部由完整 Pairing trials 组成");
 
+                    int targetCount = 0;
+                    int highCount = 0;
+                    int lowCount = 0;
+                    int rotation0Count = 0;
+                    int rotation180Count = 0;
                     for (int i = 0; i < rows.Count; i++)
                     {
                         PresentationRecord p = rows[i];
@@ -212,11 +222,31 @@ namespace StimGen
                             errors.Add("trial " + i + " 的 pair 分类不正确");
                         if (p.expectedSame != (actual == PairClass.Target))
                             errors.Add("trial " + i + " 的正确答案不正确");
+                        if (actual != PairClass.Target &&
+                            !IsActiveSimilarity(PairClassifier.ToLevel(actual)))
+                            errors.Add("trial " + i + " 使用了非活动的 similarity level");
+                        if (actual == PairClass.Target) targetCount++;
+                        else if (PairClassifier.ToLevel(actual) == SimilarityLevel.High)
+                            highCount++;
+                        else if (PairClassifier.ToLevel(actual) == SimilarityLevel.Low)
+                            lowCount++;
+                        if (!IsRotationOption(p.rotationDeltaX))
+                            errors.Add("trial " + i + " 使用了计划外的 rotation delta");
+                        if (Mathf.Approximately(p.rotationDeltaX, 0f)) rotation0Count++;
+                        if (Mathf.Approximately(p.rotationDeltaX, 180f)) rotation180Count++;
                         float expectedX = Mathf.Repeat(
                             p.referenceRotationX + p.rotationDeltaX, 360f);
                         if (Mathf.Abs(Mathf.DeltaAngle(expectedX,
                                                        p.comparisonRotationX)) > 0.001f)
                             errors.Add("trial " + i + " 的 pair rotation 不正确");
+                    }
+
+                    if (rows.Count == DefaultScoredTrials)
+                    {
+                        if (targetCount != 4 || highCount != 4 || lowCount != 4)
+                            errors.Add("12-trial 练习必须包含 4 Target / 4 High / 4 Low");
+                        if (rotation0Count != 6 || rotation180Count != 6)
+                            errors.Add("12-trial 练习必须包含 6 个 0° / 6 个 180°");
                     }
                 }
             }
@@ -228,22 +258,46 @@ namespace StimGen
             return errors.Count == 0;
         }
 
-        private static ObjectDefinition FindPracticeNonTarget(
-            List<ObjectDefinition> objects, ObjectDefinition reference,
-            SimilarityLevel desired, int offset)
+        private static bool IsActiveSimilarity(SimilarityLevel level)
         {
-            for (int pass = 0; pass < 2; pass++)
+            SimilarityLevel[] levels = ExperimentDesign.ActiveSimilarityLevels;
+            for (int i = 0; i < levels.Length; i++)
+                if (levels[i] == level) return true;
+            return false;
+        }
+
+        private static bool IsRotationOption(float angle)
+        {
+            float[] options = ExperimentDesign.RotationOptions;
+            for (int i = 0; i < options.Length; i++)
+                if (Mathf.Approximately(options[i], angle)) return true;
+            return false;
+        }
+
+        private static bool TryFindPracticePair(
+            List<ObjectDefinition> objects, SimilarityLevel desired, int offset,
+            out ObjectDefinition reference, out ObjectDefinition comparison)
+        {
+            reference = null;
+            comparison = null;
+            for (int r = 0; r < objects.Count; r++)
             {
+                ObjectDefinition candidateReference =
+                    objects[(offset + r) % objects.Count];
                 for (int n = 0; n < objects.Count; n++)
                 {
-                    ObjectDefinition candidate = objects[(n + offset + 1) % objects.Count];
-                    PairClass pc = PairClassifier.ClassifyStructural(reference, candidate);
+                    ObjectDefinition candidate =
+                        objects[(offset + r + n + 1) % objects.Count];
+                    PairClass pc = PairClassifier.ClassifyStructural(
+                        candidateReference, candidate);
                     if (pc == PairClass.Invalid || pc == PairClass.Target) continue;
-                    if (pass == 0 && PairClassifier.ToLevel(pc) != desired) continue;
-                    return candidate;
+                    if (PairClassifier.ToLevel(pc) != desired) continue;
+                    reference = candidateReference;
+                    comparison = candidate;
+                    return true;
                 }
             }
-            return null;
+            return false;
         }
 
         private static int GetCount(Dictionary<string, int> map, string key)

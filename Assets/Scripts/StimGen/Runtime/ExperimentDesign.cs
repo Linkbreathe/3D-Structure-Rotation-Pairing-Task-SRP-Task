@@ -39,53 +39,57 @@ namespace StimGen
         /// <summary>
         /// 每个 Pairing trial 中 Comparison B 相对 Reference A 的 X 轴角度差。
         /// </summary>
-        public static readonly float[] RotationOptions = { 0f, 90f, 180f };
+        public static readonly float[] RotationOptions = { 0f, 180f };
 
-        public const string TaskProtocolVersion = "Pairing_Similarity_Transition_v1";
-        public const string RotationProtocolVersion = "Pair_XDelta_0_90_180_YSpin_v1";
+        /// <summary>
+        /// Active non-target structural-similarity conditions for the 2 x 2 protocol.
+        /// Medium remains in the serialized enum only so legacy JSON cannot be
+        /// misinterpreted after an enum-value shift.
+        /// </summary>
+        public static readonly SimilarityLevel[] ActiveSimilarityLevels =
+        {
+            SimilarityLevel.High,
+            SimilarityLevel.Low,
+        };
+
+        public const string TaskProtocolVersion = "Pairing_Similarity_Transition_2x2_v1";
+        public const string RotationProtocolVersion = "Pair_XDelta_0_180_YSpin_v1";
         public const string ConditionRotationAxis = "X";
         public const string PresentationAnimationAxis = "Y";
 
         /// <summary>
-        /// 六种 block sequence。L/M/H 分别是 Low / Medium / High structural similarity。
+        /// 四种 block sequence。L/H 分别是 Low / High structural similarity。
         ///
         /// 顺序与最终实验计划第 8 节完全一致。
         /// </summary>
         public static readonly SimilarityLevel[][] BlockSequences =
         {
-            // A: L L M H   →  L→L(No-op), L→M, M→H
-            new[] { SimilarityLevel.Low,    SimilarityLevel.Low,    SimilarityLevel.Medium, SimilarityLevel.High },
-            // B: L H M M   →  L→H, H→M, M→M(No-op)
-            new[] { SimilarityLevel.Low,    SimilarityLevel.High,   SimilarityLevel.Medium,  SimilarityLevel.Medium },
-            // C: M L H H   →  M→L, L→H, H→H(No-op)
-            new[] { SimilarityLevel.Medium, SimilarityLevel.Low,    SimilarityLevel.High,   SimilarityLevel.High },
-            // D: M M H L   →  M→M(No-op), M→H, H→L
-            new[] { SimilarityLevel.Medium, SimilarityLevel.Medium, SimilarityLevel.High,   SimilarityLevel.Low },
-            // E: H M L L   →  H→M, M→L, L→L(No-op)
-            new[] { SimilarityLevel.High,   SimilarityLevel.Medium, SimilarityLevel.Low,    SimilarityLevel.Low },
-            // F: H H L M   →  H→H(No-op), H→L, L→M
-            new[] { SimilarityLevel.High,   SimilarityLevel.High,   SimilarityLevel.Low,    SimilarityLevel.Medium },
+            // A: L L H H   →  L→L(No-op), L→H, H→H(No-op)
+            new[] { SimilarityLevel.Low,  SimilarityLevel.Low,  SimilarityLevel.High, SimilarityLevel.High },
+            // B: L H L H   →  L→H, H→L, L→H
+            new[] { SimilarityLevel.Low,  SimilarityLevel.High, SimilarityLevel.Low,  SimilarityLevel.High },
+            // C: H L H L   →  H→L, L→H, H→L
+            new[] { SimilarityLevel.High, SimilarityLevel.Low,  SimilarityLevel.High, SimilarityLevel.Low },
+            // D: H H L L   →  H→H(No-op), H→L, L→L(No-op)
+            new[] { SimilarityLevel.High, SimilarityLevel.High, SimilarityLevel.Low,  SimilarityLevel.Low },
         };
 
-        public static readonly string[] BlockSequenceIds = { "A", "B", "C", "D", "E", "F" };
+        public static readonly string[] BlockSequenceIds = { "A", "B", "C", "D" };
 
-        public const int BlocksPerParticipant = 6;
+        public const int BlocksPerParticipant = 4;
 
         /// <summary>
-        /// 最终计划第 9 节指定的六组参与者间 block 顺序。
-        /// P001/P007/P013/P019 使用第 1 组，随后按编号循环轮换；
-        /// 这样人数增加时仍然可以继续生成，而前 24 人每组正好 4 人。
+        /// 2 x 2 方案使用四组平衡的参与者间 block 顺序。
+        /// 按参与者编号循环轮换；24 名参与者时每组恰好 6 人。
         /// </summary>
         public static int[] BlockOrderFor(int participantNumber)
         {
             int[][] balancedOrders =
             {
-                new[] { 0, 1, 5, 2, 4, 3 }, // A → B → F → C → E → D
-                new[] { 1, 2, 0, 3, 5, 4 }, // B → C → A → D → F → E
-                new[] { 2, 3, 1, 4, 0, 5 }, // C → D → B → E → A → F
-                new[] { 3, 4, 2, 5, 1, 0 }, // D → E → C → F → B → A
-                new[] { 4, 5, 3, 0, 2, 1 }, // E → F → D → A → C → B
-                new[] { 5, 0, 4, 1, 3, 2 }, // F → A → E → B → D → C
+                new[] { 0, 1, 3, 2 }, // A → B → D → C
+                new[] { 1, 2, 0, 3 }, // B → C → A → D
+                new[] { 2, 3, 1, 0 }, // C → D → B → A
+                new[] { 3, 0, 2, 1 }, // D → A → C → B
             };
 
             int zeroBased = participantNumber - 1;

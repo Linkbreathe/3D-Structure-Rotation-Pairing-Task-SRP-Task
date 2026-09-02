@@ -37,14 +37,14 @@ Participants view two 3D objects sequentially and judge whether the second objec
 The task manipulates two factors:
 
 - **Structural Similarity**: Low / High
-- **Rotation Disparity**: 0° / 90°
+- **Rotation Disparity**: 0° / 180°
 
 This yields the main 2 × 2 challenge space:
 
-| Condition | Rotation 0° | Rotation 90° |
+| Condition | Rotation 0° | Rotation 180° |
 |---|---:|---:|
-| **Low Structural Similarity** | L0 | L90 |
-| **High Structural Similarity** | H0 | H90 |
+| **Low Structural Similarity** | L0 | L180 |
+| **High Structural Similarity** | H0 | H180 |
 
 ### Structural similarity
 
@@ -97,7 +97,7 @@ For every trial:
 | `participant_id` | Anonymous participant identifier |
 | `trial_id` | Trial index |
 | `similarity_level` | Low / High |
-| `rotation_deg` | 0 / 90 |
+| `rotation_deg` | 0 / 180 |
 | `pair_label` | Same / Different ground truth |
 | `response` | Participant response |
 | `correct` | Accuracy |

@@ -31,7 +31,7 @@ namespace StimGen
 
     /// <summary>
     /// 建库流程：
-    ///   ① 生成家族（Base + High/Medium/Low 变体），每个成员单独过几何 + 遮挡检查
+    ///   ① 生成家族（Base + High/Low 变体），每个成员单独过几何 + 遮挡检查
     ///   ② 给每个物体缓存 Y轴 0°/45°/90° 的建库观察轮廓（独立于正式任务的 X轴条件）
     ///   ③ 计算**全部正式物体两两之间**的配对类型（结构关系 + 轮廓双重验证）
     ///   ④ 覆盖度不足时补充生成，直到每个物体每级都有足够候选或达到上限
@@ -148,7 +148,7 @@ namespace StimGen
                                                     Dictionary<string, ViewCapture[]> captures,
                                                     bool practice)
         {
-            var levels = new[] { SimilarityLevel.High, SimilarityLevel.Medium, SimilarityLevel.Low };
+            SimilarityLevel[] levels = ExperimentDesign.ActiveSimilarityLevels;
 
             for (int attempt = 0; attempt < bankSettings.familyAttempts; attempt++)
             {
@@ -314,7 +314,7 @@ namespace StimGen
                                          Dictionary<string, ViewCapture[]> captures,
                                          BankProgress progress)
         {
-            var levels = new[] { SimilarityLevel.High, SimilarityLevel.Medium, SimilarityLevel.Low };
+            SimilarityLevel[] levels = ExperimentDesign.ActiveSimilarityLevels;
             int added = 0;
 
             for (int round = 0; round < 6 && added < bankSettings.maxTopUpObjects; round++)

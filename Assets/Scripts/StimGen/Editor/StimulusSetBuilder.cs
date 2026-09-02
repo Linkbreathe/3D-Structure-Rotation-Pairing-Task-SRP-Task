@@ -12,7 +12,7 @@ namespace StimGen.EditorTools
     ///
     /// 三个阶段，必须按顺序做：
     ///   ① 建刺激库   生成家族 → 检查 → 算全物体两两配对矩阵 → 冻结成 bank.json
-    ///   ② 排会话     用配对矩阵为每个参与者排 6 个 block 的完整序列
+    ///   ② 排会话     用配对矩阵为每个参与者排 4 个 block 的完整序列
     ///   ③ 运行前检查 任何不平衡或不合法的序列在这里被拦下
     /// </summary>
     public class StimulusSetBuilder : EditorWindow
@@ -66,8 +66,8 @@ namespace StimGen.EditorTools
             StimulusSetBuilder builder = CreateInstance<StimulusSetBuilder>();
             builder.masterSeed = 20260823;
             builder.runVisualChecks = true;
-            // The final plan defines High/Medium/Low structurally (2/3, 1/3,
-            // 0/3 retained relations).  A pilot must establish the perceptual
+            // The active 2 x 2 plan defines High/Low structurally (2/3 and
+            // 0/3 retained relations). A pilot must establish the perceptual
             // gradient, so the automated gate only removes gross visibility
             // and view-consistency failures here.
             builder.visual.enforceLevelIouBands = false;
@@ -80,6 +80,7 @@ namespace StimGen.EditorTools
             {
                 builder.BuildBank();
                 builder.BuildSessions();
+                PracticeSessionAssetUtility.EnsureCurrent();
             }
             finally
             {
@@ -103,6 +104,7 @@ namespace StimGen.EditorTools
             try
             {
                 builder.BuildSessions();
+                PracticeSessionAssetUtility.EnsureCurrent();
             }
             finally
             {
@@ -133,8 +135,6 @@ namespace StimGen.EditorTools
             builder.runVisualChecks = true;
             builder.participantCount = 24;
             builder.visual.highMinIou = 0.25f;
-            builder.visual.mediumMinIou = 0.20f;
-            builder.visual.mediumMaxIou = 0.65f;
             builder.visual.lowMaxIou = 0.80f;
             builder.visual.maxIouSpread = 0.50f;
             builder.outputFolder = "Assets/StimulusSets";
@@ -146,7 +146,7 @@ namespace StimGen.EditorTools
             finally { DestroyImmediate(builder); }
         }
 
-        /// <summary>输出一个基础物体和三个变体的视觉检查细节，帮助校准 IoU/遮挡阈值。</summary>
+        /// <summary>输出一个基础物体和 High/Low 变体的视觉检查细节，帮助校准 IoU/遮挡阈值。</summary>
         [MenuItem("Tools/StimGen/Diagnose Visual Defaults")]
         public static void DiagnoseVisualDefaults()
         {
@@ -169,8 +169,7 @@ namespace StimGen.EditorTools
                           SilhouetteAnalyzer.Evaluate(baseViews, null,
                               SimilarityLevel.Identical, builder.visual));
 
-                SimilarityLevel[] levels =
-                    { SimilarityLevel.High, SimilarityLevel.Medium, SimilarityLevel.Low };
+                SimilarityLevel[] levels = ExperimentDesign.ActiveSimilarityLevels;
                 for (int i = 0; i < levels.Length; i++)
                 {
                     ObjectDefinition variant = VariantGenerator.Generate(baseDef, levels[i], seed++, builder.validation);
@@ -220,13 +219,11 @@ namespace StimGen.EditorTools
                 var samples = new Dictionary<SimilarityLevel, List<float>>
                 {
                     { SimilarityLevel.High, new List<float>() },
-                    { SimilarityLevel.Medium, new List<float>() },
                     { SimilarityLevel.Low, new List<float>() },
                 };
                 var spreads = new Dictionary<SimilarityLevel, List<float>>
                 {
                     { SimilarityLevel.High, new List<float>() },
-                    { SimilarityLevel.Medium, new List<float>() },
                     { SimilarityLevel.Low, new List<float>() },
                 };
                 const int maxSamplesPerLevel = 500;
@@ -254,13 +251,11 @@ namespace StimGen.EditorTools
                     }
 
                     if (samples[SimilarityLevel.High].Count >= maxSamplesPerLevel &&
-                        samples[SimilarityLevel.Medium].Count >= maxSamplesPerLevel &&
                         samples[SimilarityLevel.Low].Count >= maxSamplesPerLevel)
                         break;
                 }
 
-                SimilarityLevel[] levels =
-                    { SimilarityLevel.High, SimilarityLevel.Medium, SimilarityLevel.Low };
+                SimilarityLevel[] levels = ExperimentDesign.ActiveSimilarityLevels;
                 for (int i = 0; i < levels.Length; i++)
                 {
                     List<float> values = samples[levels[i]];
@@ -337,8 +332,8 @@ namespace StimGen.EditorTools
                 string.Join("/", Array.ConvertAll(ExperimentDesign.SegmentLengths, x => x.ToString())) +
                 "，每 block " + (ExperimentDesign.SegmentCount - 1) + " 个边界，" +
                 "每人 " + ExperimentDesign.BlocksPerParticipant * (ExperimentDesign.SegmentCount - 1) +
-                " 个（12 真 + 6 No-op）", EditorStyles.miniLabel);
-            EditorGUILayout.LabelField("  X轴 RotationDelta：0° / 90° / 180°；" +
+                " 个（8 真 + 4 No-op）", EditorStyles.miniLabel);
+            EditorGUILayout.LabelField("  X轴 RotationDelta：0° / 180°；" +
                 "Y轴观看动画由 ExperimentRunner 统一控制", EditorStyles.miniLabel);
         }
 
@@ -364,14 +359,14 @@ namespace StimGen.EditorTools
         {
             EditorGUILayout.LabelField("① 刺激库", EditorStyles.boldLabel);
             bankSettings.formalFamilies = EditorGUILayout.IntField(GC("正式家族数",
-                "计划建议 24 个。每个家族 = 1 个基准物体 + High/Medium/Low 变体。"),
+                "计划建议 24 个。每个家族 = 1 个基准物体 + High/Low 变体。"),
                 bankSettings.formalFamilies);
             bankSettings.practiceFamilies = EditorGUILayout.IntField(GC("练习家族数",
                 "计划建议 4–6 个。练习物体单独存放，绝不会进入正式实验。"),
                 bankSettings.practiceFamilies);
             bankSettings.variantsPerLevel = EditorGUILayout.IntSlider(GC("每级变体数",
-                "每个家族在 High/Medium/Low 各生成几个变体。\n\n" +
-                "1 → 24 家族 × 4 = 96 个正式物体（计划的基准规模）。\n" +
+                "每个家族在 High/Low 各生成几个变体。\n\n" +
+                "1 → 24 家族 × 3 = 72 个正式物体（计划的基准规模）。\n" +
                 "如果配对覆盖度不足，提高这个数比依赖自动补充更可控。"),
                 bankSettings.variantsPerLevel, 1, 3);
             bankSettings.minCandidatesPerLevel = EditorGUILayout.IntSlider(GC("每级最少候选数",
@@ -424,14 +419,10 @@ namespace StimGen.EditorTools
             EditorGUILayout.LabelField("  IoU = 两个轮廓的交集面积 ÷ 并集面积", EditorStyles.miniLabel);
             visual.enforceLevelIouBands = EditorGUILayout.Toggle(
                 new GUIContent("Enforce level IoU bands",
-                    "关闭时只做遮挡/视角一致性淘汰；High/Medium/Low 的感知难度留给 pilot 校准。"),
+                    "关闭时只做遮挡/视角一致性淘汰；High/Low 的感知难度留给 pilot 校准。"),
                 visual.enforceLevelIouBands);
             visual.highMinIou = EditorGUILayout.Slider(GC("High IoU ≥",
                 "改 1 条关系但看起来已经差很多 → 淘汰。"), visual.highMinIou, 0.5f, 0.99f);
-            visual.mediumMinIou = EditorGUILayout.Slider(GC("Medium IoU ≥",
-                "太低就和 Low 混了。"), visual.mediumMinIou, 0.3f, 0.9f);
-            visual.mediumMaxIou = EditorGUILayout.Slider(GC("Medium IoU ≤",
-                "太高就和 High 混了。三个区间不能重叠。"), visual.mediumMaxIou, 0.4f, 0.95f);
             visual.lowMaxIou = EditorGUILayout.Slider(GC("Low IoU ≤",
                 "最容易卡住的一根。等体积零件剪影天然重合度高，压不下去就往上调。"),
                 visual.lowMaxIou, 0.1f, 0.8f);
